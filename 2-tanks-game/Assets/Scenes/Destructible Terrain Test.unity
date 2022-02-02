@@ -305,25 +305,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
-    - target: {fileID: 5918156292631225716, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -18.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918156292631225716, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -14.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
-      propertyPath: terrainWidth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
-      propertyPath: terrainHeight
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
-      propertyPath: perlinInterval
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
