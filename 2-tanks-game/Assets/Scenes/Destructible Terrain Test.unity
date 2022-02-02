@@ -248,9 +248,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &5918156292338637052
+--- !u!1001 &2035767485
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -259,7 +259,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5918156291701728585, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5918156291701728585, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5918156291701728591, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
       propertyPath: m_Name
-      value: Grid
+      value: Random Terrain
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}

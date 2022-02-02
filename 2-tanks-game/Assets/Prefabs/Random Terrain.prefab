@@ -222,7 +222,7 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: c949029eeb612492f92f614ae4586d22, type: 2}
   terrainWidth: 50
   terrainHeight: 30
-  perlinInterval: 5
+  perlinInterval: 4
 --- !u!114 &7567192837253878989
 MonoBehaviour:
   m_ObjectHideFlags: 0
