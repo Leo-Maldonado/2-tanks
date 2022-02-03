@@ -5,6 +5,8 @@ using UnityEngine.Tilemaps;
 
 public class TerrainGenerator : MonoBehaviour
 {
+
+    
     // Array to keep track of where tiles should be placed
     int[,] mapArray;
 
@@ -20,6 +22,7 @@ public class TerrainGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.SetResolution(1280, 720, true);
         // Get tilemap
         tilemap = GetComponent<Tilemap>();
         // Generate terrain once
