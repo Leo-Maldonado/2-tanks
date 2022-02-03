@@ -17,4 +17,10 @@ public class Bullet : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
+
+    // Destroy when goes off screen
+    private void OnBecameInvisible()
+    {
+        Destroy(this.gameObject);
+    }
 }

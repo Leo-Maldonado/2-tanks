@@ -15,7 +15,7 @@ public class FishSpawner : MonoBehaviour
         {
             Vector3 spawnPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             spawnPos.z = 1;
-            SpawnFishAtLocation(spawnPos);
+            //SpawnFishAtLocation(spawnPos);
         }
     }
 

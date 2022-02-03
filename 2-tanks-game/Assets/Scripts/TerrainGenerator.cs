@@ -19,6 +19,13 @@ public class TerrainGenerator : MonoBehaviour
     // Sets width and height of generated terrain, and interval for Perlin noise function (lower interval means more randomness)
     public int terrainWidth, terrainHeight, perlinInterval;
 
+    // Tank prefabs to instantiate players
+    public GameObject Tank1;
+    public GameObject Tank2;
+
+    // Tank width to spawn at relative to terrain
+    public int tank1X, tank2X;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,13 +50,47 @@ public class TerrainGenerator : MonoBehaviour
     void GenerateTerrain()
     {
         float seed = Random.Range(0f, 100f);
-        mapArray = GenerateArray(terrainWidth, terrainHeight, true);
-        RenderMap(PerlinNoiseSmooth(mapArray, seed, perlinInterval), tilemap, tile);
+        mapArray = GenerateArray(terrainWidth, terrainHeight, true, tank1X, tank2X);
+        RenderMap(PerlinNoiseSmooth(mapArray, seed, perlinInterval), tilemap, tile, tank1X, tank2X);
+        RenderTank(Tank1, Tank2, mapArray, tank1X, tank2X, tilemap);
+    }
 
+    // Instantiate the tank players given the map that was generated
+    public static void RenderTank(GameObject Tank1, GameObject Tank2, int[,] map, int tank1X, int tank2X, Tilemap tilemap)
+    {
+        // Find highest tile height in given X
+        int tank1Y = map.GetUpperBound(1);
+        int tank2Y = map.GetUpperBound(1);
+        for (int y = map.GetUpperBound(1); y >= 0; y--)
+        {
+            if (map[tank1X, y] == 1)
+            {
+                tank1Y = y;
+                break;
+            }
+        }
+        for (int y = map.GetUpperBound(1); y >= 0; y--)
+        {
+            if (map[tank2X, y] == 1)
+            {
+                tank2Y = y;
+                break;
+            }
+        }
+        // Convert tile to world position and instantiate
+        Vector2 tank1Pos = tilemap.GetCellCenterWorld(new Vector3Int(tank1X, tank1Y, 0));
+        Vector2 tank2Pos = tilemap.GetCellCenterWorld(new Vector3Int(tank2X, tank2Y, 0));
+        tank1Pos.y += 1;
+        tank2Pos.y += 1;
+        GameObject tank1 = Instantiate(Tank1, tank1Pos, Quaternion.identity);
+        tank1.name = "Tank1";
+        GameObject tank2 = Instantiate(Tank2, tank2Pos, Quaternion.identity);
+        tank2.transform.localScale = new Vector3(tank2.transform.localScale.x * -1, tank2.transform.localScale.y, tank2.transform.localScale.z);
+        tank2.name = "Tank2";
     }
 
     // Generates an array with specified width, height, and either empty or full (0s or 1s)
-    public static int[,] GenerateArray(int width, int height, bool empty)
+    public static int[,] GenerateArray(int width, int height, bool empty, int tank1X, int tank2X)
     {
         int[,] map = new int[width, height];
         for (int x = 0; x < map.GetUpperBound(0); x++)
@@ -70,10 +111,22 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     // Render tilemap by placing tiles if there is a 1 in a space on the map array
-    public static void RenderMap(int[,] map, Tilemap tilemap, TileBase tile)
+    public static void RenderMap(int[,] map, Tilemap tilemap, TileBase tile, int tank1X, int tank2X)
     {
         //Clear the map (ensures we dont overlap)
         tilemap.ClearAllTiles();
+        GameObject tank1 = GameObject.Find("Tank1");
+        GameObject tank2 = GameObject.Find("Tank2");
+        Destroy(tank1);
+        Destroy(tank2);
+        //Ensure theres a platform for the tanks
+        for (int y = 0; y < map.GetUpperBound(1); y++)
+        {
+            map[tank1X - 1, y] = map[tank1X, y];
+            map[tank1X + 1, y] = map[tank1X, y];
+            map[tank2X - 1, y] = map[tank2X, y];
+            map[tank2X + 1, y] = map[tank2X, y];
+        }
         //Loop through the width of the map
         for (int x = 0; x < map.GetUpperBound(0); x++)
         {
@@ -81,7 +134,7 @@ public class TerrainGenerator : MonoBehaviour
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
                 // 1 = tile, 0 = no tile
-                if (map[x, y] == 1)
+                if (map[x, y] == 1) // && ((next to tank1x or tank2x) && (!higher than tank1y or !higher than tank2y)) )
                 {
                     tilemap.SetTile(new Vector3Int(x, y, 0), tile);
                 }
