@@ -131,7 +131,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 0
 --- !u!114 &-2798875421278413825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,5 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b5c14c567ad54384bcd4e9be3ee12a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTurn: 0
   missilePrefab: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
   missileVelocity: 3

@@ -23,12 +23,16 @@ public class Tank1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && playerTurn == PlayersTurn.Tank1)
+        if (Input.GetKeyDown(KeyCode.Mouse0) && playerTurn == PlayersTurn.Tank1
+            && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
-            Vector3 missilePos = new Vector3(transform.localPosition.x + transform.right.x,
-                                             transform.localPosition.y + transform.right.y);
+            // Spawn missile slightly above tank to avoid colliding with it *** maybe change this later ***
+            Vector3 missilePos = new Vector3(transform.localPosition.x,
+                                             transform.localPosition.y + 1);
             GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
-            missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            // Find mouse position relative to tank position
+            Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
             playerTurn = PlayersTurn.Tank2;
         }
     }
