@@ -14,10 +14,22 @@ public class Tank1 : MonoBehaviour
     // Missile velocity
     public float missileVelocity;
 
+    public int Health = 3;
+
+    public SpriteRenderer sprender;
+
     // Start is called before the first frame update
     void Start()
     {
 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.GetComponent<Bullet>())
+        {
+            this.Health -= 1;
+        }
     }
 
     // Update is called once per frame
@@ -35,5 +47,11 @@ public class Tank1 : MonoBehaviour
             missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
             playerTurn = PlayersTurn.Tank2;
         }
+        if(this.Health <= 0)
+        {
+            sprender = gameObject.GetComponent<SpriteRenderer>();
+            sprender.enabled = false;
+        }
+
     }
 }
