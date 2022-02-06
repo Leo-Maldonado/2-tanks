@@ -35,7 +35,6 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<Tilemap>())
         {
-            Debug.Log("bullet collision w/tile");
             FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
             Destroy(this.gameObject);
         }
