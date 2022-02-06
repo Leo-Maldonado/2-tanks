@@ -145,4 +145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
-  missileVelocity: 3
+  missileVelocity: 1
+  Health: 3
+  sprender: {fileID: 0}
