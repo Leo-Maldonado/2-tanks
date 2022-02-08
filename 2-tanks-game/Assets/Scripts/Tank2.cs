@@ -13,7 +13,7 @@ public class Tank2 : MonoBehaviour
     // The two tanks
     private GameObject tank1;
 
-    public int Health = 3;
+    public int Health = 100;
 
     public SpriteRenderer sprender;
 
@@ -23,13 +23,10 @@ public class Tank2 : MonoBehaviour
         tank1 = GameObject.Find("Tank1");
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    // Apply the specified damage to the tank's health
+    public void TakeDamage(int damage)
     {
-        if(collision.gameObject.GetComponent<Bullet>())
-        {
-            this.Health -= 1;
-        }
+        this.Health -= damage;
     }
 
     // Update is called once per frame

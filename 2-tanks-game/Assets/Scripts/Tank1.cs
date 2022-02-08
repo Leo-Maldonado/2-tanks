@@ -14,22 +14,14 @@ public class Tank1 : MonoBehaviour
     // Missile velocity
     public float missileVelocity;
 
-    public int Health = 3;
+    public int Health = 100;
 
     public SpriteRenderer sprender;
 
-    // Start is called before the first frame update
-    void Start()
+    // Apply the specified damage to the tank's health
+    public void TakeDamage(int damage)
     {
-
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.GetComponent<Bullet>())
-        {
-            this.Health -= 1;
-        }
+        this.Health -= damage;
     }
 
     // Update is called once per frame

@@ -182,7 +182,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -223,6 +223,11 @@ MonoBehaviour:
   terrainWidth: 50
   terrainHeight: 30
   perlinInterval: 4
+  Tank1Prefab: {fileID: 0}
+  Tank2Prefab: {fileID: 0}
+  tank1X: 0
+  tank2X: 0
+  arrow: {fileID: 0}
 --- !u!114 &7567192837253878989
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -30,7 +30,7 @@ public class GameOverScreen : MonoBehaviour
     {
         Running = true;
         yield return new WaitForSecondsRealtime(5);
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
 

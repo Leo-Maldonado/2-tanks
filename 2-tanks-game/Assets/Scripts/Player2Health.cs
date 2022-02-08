@@ -11,7 +11,7 @@ public class Player2Health : MonoBehaviour
 
     private TMP_Text TextComponent;
 
-    private int t2health = 3;
+    private int t2health = 100;
 
     void Start()
     {
@@ -25,6 +25,6 @@ public class Player2Health : MonoBehaviour
     {
         tank2 = GameObject.Find("Tank2");
         t2health = tank2.GetComponent<Tank2>().Health;
-        TextComponent.text = "Player 2 Health: " + t2health + "/3";
+        TextComponent.text = "Player 2 Health: " + t2health;
     }
 }

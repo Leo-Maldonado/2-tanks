@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
 {
     // Radius of the bullet's explosion
     public int explosionRadius = 3;
+    // How much damage the projectile does when it directly hits a tank
+    public int damage = 30;
     public bool IsInvisible = false;
 
     private GameObject tank1;
@@ -37,16 +39,32 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.GetComponent<Tilemap>())
         {
             FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
+            // Deal damage to any tanks within the explosion radius
+            // damage is decreased based on how far the projectile explodes from the tank
+            float tank1Distance = Vector3.Distance(transform.position, tank1.transform.position);
+            float tank2Distance = Vector3.Distance(transform.position, tank2.transform.position);
+            if (tank1Distance < explosionRadius)
+            {
+                float damageScale = (explosionRadius - tank1Distance) / explosionRadius;
+                tank1.GetComponent<Tank1>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
+            }
+            if (tank2Distance < explosionRadius)
+            {
+                float damageScale = (explosionRadius - tank2Distance) / explosionRadius;
+                tank2.GetComponent<Tank2>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
+            }
             Destroy(this.gameObject);
             Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         if (collision.gameObject.GetComponent<Tank1>())
         {
+            tank1.GetComponent<Tank1>().TakeDamage(damage);
             Destroy(this.gameObject);
             Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         if (collision.gameObject.GetComponent<Tank2>())
         {
+            tank2.GetComponent<Tank2>().TakeDamage(damage);
             Destroy(this.gameObject);
             Destroy(FindObjectOfType<Arrow>().gameObject);
         }
