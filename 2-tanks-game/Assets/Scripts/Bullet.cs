@@ -26,6 +26,7 @@ public class Bullet : MonoBehaviour
             if (transform.position.x < -16f || transform.position.x > 37f || transform.position.y < 0f)
             {
                 Destroy(this.gameObject);
+                Destroy(FindObjectOfType<Arrow>().gameObject);
             }
         }
     }
@@ -37,14 +38,17 @@ public class Bullet : MonoBehaviour
         {
             FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
             Destroy(this.gameObject);
+            Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         if (collision.gameObject.GetComponent<Tank1>())
         {
             Destroy(this.gameObject);
+            Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         if (collision.gameObject.GetComponent<Tank2>())
         {
             Destroy(this.gameObject);
+            Destroy(FindObjectOfType<Arrow>().gameObject);
         }
     }
 
@@ -55,6 +59,7 @@ public class Bullet : MonoBehaviour
         {
 
             Destroy(this.gameObject);
+            Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         else
         {

@@ -5,8 +5,6 @@ using UnityEngine.Tilemaps;
 
 public class TerrainGenerator : MonoBehaviour
 {
-
-    
     // Array to keep track of where tiles should be placed
     int[,] mapArray;
 
@@ -20,11 +18,14 @@ public class TerrainGenerator : MonoBehaviour
     public int terrainWidth, terrainHeight, perlinInterval;
 
     // Tank prefabs to instantiate players
-    public GameObject Tank1;
-    public GameObject Tank2;
+    public GameObject Tank1Prefab;
+    public GameObject Tank2Prefab;
 
     // Tank width to spawn at relative to terrain
     public int tank1X, tank2X;
+
+    // The arrow to spawn
+    public GameObject arrow;
 
     // Start is called before the first frame update
     void Start()
@@ -34,15 +35,43 @@ public class TerrainGenerator : MonoBehaviour
         tilemap = GetComponent<Tilemap>();
         // Generate terrain once
         GenerateTerrain();
+        // Spawn arrow
+        SpawnArrow();
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Spawn arrows every turn
+        SpawnArrow();
+
         // For now, generate new terrain every time the space bar is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GenerateTerrain();
+            // Remove arrow and spawn
+            Destroy(FindObjectOfType<Arrow>().gameObject);
+            SpawnArrow();
+        }
+    }
+
+    // Spawn arrow
+    void SpawnArrow()
+    {
+        GameObject tank1 = GameObject.Find("Tank1");
+        GameObject tank2 = GameObject.Find("Tank2");
+
+        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank1 && FindObjectOfType<Arrow>() == null)
+        {
+            // Instantiate in front of tank
+            Vector3 arrowPos = new Vector3(tank1.transform.position.x + 1.5f, tank1.transform.position.y + 1.5f);
+            GameObject arw = Instantiate(arrow, arrowPos, Quaternion.identity);
+        }
+        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2 && FindObjectOfType<Arrow>() == null)
+        {
+            // Instantiate in front of tank
+            Vector3 arrowPos = new Vector3(tank2.transform.position.x - 1.5f, tank2.transform.position.y + 1.5f);
+            GameObject arw = Instantiate(arrow, arrowPos, Quaternion.identity);
         }
     }
 
@@ -52,11 +81,11 @@ public class TerrainGenerator : MonoBehaviour
         float seed = Random.Range(0f, 100f);
         mapArray = GenerateArray(terrainWidth, terrainHeight, true, tank1X, tank2X);
         RenderMap(PerlinNoiseSmooth(mapArray, seed, perlinInterval), tilemap, tile, tank1X, tank2X);
-        RenderTank(Tank1, Tank2, mapArray, tank1X, tank2X, tilemap);
+        RenderTank(Tank1Prefab, Tank2Prefab, mapArray, tank1X, tank2X, tilemap);
     }
 
     // Instantiate the tank players given the map that was generated
-    public static void RenderTank(GameObject Tank1, GameObject Tank2, int[,] map, int tank1X, int tank2X, Tilemap tilemap)
+    public static void RenderTank(GameObject Tank1Prefab, GameObject Tank2Prefab, int[,] map, int tank1X, int tank2X, Tilemap tilemap)
     {
         // Find highest tile height in given X
         int tank1Y = map.GetUpperBound(1);
@@ -82,9 +111,9 @@ public class TerrainGenerator : MonoBehaviour
         Vector2 tank2Pos = tilemap.GetCellCenterWorld(new Vector3Int(tank2X, tank2Y, 0));
         tank1Pos.y += 1;
         tank2Pos.y += 1;
-        GameObject tank1 = Instantiate(Tank1, tank1Pos, Quaternion.identity);
+        GameObject tank1 = Instantiate(Tank1Prefab, tank1Pos, Quaternion.identity);
         tank1.name = "Tank1";
-        GameObject tank2 = Instantiate(Tank2, tank2Pos, Quaternion.identity);
+        GameObject tank2 = Instantiate(Tank2Prefab, tank2Pos, Quaternion.identity);
         tank2.transform.localScale = new Vector3(tank2.transform.localScale.x * -1, tank2.transform.localScale.y, tank2.transform.localScale.z);
         tank2.name = "Tank2";
     }

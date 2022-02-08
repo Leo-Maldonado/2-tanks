@@ -41,9 +41,9 @@ public class Tank2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse0) && tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2
             && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
-            // Spawn missile slightly above tank to avoid colliding with it *** maybe change this later ***
-            Vector3 missilePos = new Vector3(transform.localPosition.x,
-                                             transform.localPosition.y + 1);
+            // Spawn missile with arrow
+            Vector3 missilePos = new Vector3(transform.localPosition.x - 1.5f,
+                                             transform.localPosition.y + 1.5f);
             GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
             // Find mouse position relative to tank position
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;

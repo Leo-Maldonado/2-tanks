@@ -1089,6 +1089,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 4478302489595721622, guid: 6ad41655c43cc40a98f2cfd954559961, type: 3}
     - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 240248122081254970, guid: 333a1e68d2b8c40aca72997dd12e3ec1, type: 3}
+    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
       propertyPath: tank1X
       value: 5
       objectReference: {fileID: 0}
@@ -1104,6 +1108,14 @@ PrefabInstance:
       propertyPath: tank2Width
       value: 65
       objectReference: {fileID: 0}
+    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
+      propertyPath: Tank1Prefab
+      value: 
+      objectReference: {fileID: 1643733340517513812, guid: 83e2daa96f9394c579cac3561eb4a6cf, type: 3}
+    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
+      propertyPath: Tank2Prefab
+      value: 
+      objectReference: {fileID: 4478302489595721622, guid: 6ad41655c43cc40a98f2cfd954559961, type: 3}
     - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
       propertyPath: terrainWidth
       value: 75
