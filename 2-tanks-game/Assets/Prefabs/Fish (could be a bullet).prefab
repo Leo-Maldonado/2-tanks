@@ -98,6 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionRadius: 3
+  IsInvisible: 0
 --- !u!60 &2432396971577233539
 PolygonCollider2D:
   m_ObjectHideFlags: 0
