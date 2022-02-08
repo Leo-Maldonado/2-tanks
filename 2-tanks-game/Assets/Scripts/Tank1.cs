@@ -14,9 +14,14 @@ public class Tank1 : MonoBehaviour
     // Missile velocity
     public float missileVelocity;
 
+    // Health
     public int Health = 100;
 
+    // Sprite Renderer
     public SpriteRenderer sprender;
+
+    // GameOverScreen instance to access is game running
+    private GameOverScreen gameOverScreen;
 
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
@@ -24,11 +29,20 @@ public class Tank1 : MonoBehaviour
         this.Health -= damage;
     }
 
+    // Start
+    void Start()
+    {
+        gameOverScreen = FindObjectOfType<GameOverScreen>();    
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && playerTurn == PlayersTurn.Tank1
-            && GameObject.FindGameObjectWithTag("Projectile") == null)
+        if (Input.GetKeyDown(KeyCode.Mouse0)
+            && playerTurn == PlayersTurn.Tank1
+            && GameObject.FindGameObjectWithTag("Projectile") == null
+            && !gameOverScreen.GameOver
+            )
         {
             // Spawn missile with arrow
             Vector3 missilePos = new Vector3(transform.localPosition.x + 1.5f,

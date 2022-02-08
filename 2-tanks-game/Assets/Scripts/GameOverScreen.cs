@@ -14,7 +14,7 @@ public class GameOverScreen : MonoBehaviour
 
     private TMP_Text TextComponent;
 
-    private bool GameOver = false;
+    public bool GameOver = false;
 
     private bool Running = false;
 
@@ -47,14 +47,12 @@ public class GameOverScreen : MonoBehaviour
 
         if(t1health <= 0)
         {
-            //Time.timeScale = 0;
             TextComponent.text = "Tank 2 Wins!";
             GameOver = true;
         }
 
         if (t2health <= 0)
         {
-            //Time.timeScale = 0;
             TextComponent.text = "Tank 1 Wins!";
             GameOver = true;
         }
@@ -62,7 +60,6 @@ public class GameOverScreen : MonoBehaviour
         if(GameOver == true & Running == false)
         {
             StartCoroutine(Wait());
-            //SceneManager.LoadScene("Main");
         }
     }
 }

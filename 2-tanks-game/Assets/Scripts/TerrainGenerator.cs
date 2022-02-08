@@ -42,8 +42,11 @@ public class TerrainGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Spawn arrows every turn
-        SpawnArrow();
+        // Spawn arrows every turn if a player hasn't won yet
+        if (GameObject.Find("Tank1").GetComponent<Tank1>().Health > 0 && GameObject.Find("Tank2").GetComponent<Tank2>().Health > 0)
+        {
+            SpawnArrow();
+        }
 
         // For now, generate new terrain every time the space bar is pressed
         if (Input.GetKeyDown(KeyCode.Space))

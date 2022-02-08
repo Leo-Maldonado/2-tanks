@@ -13,14 +13,20 @@ public class Tank2 : MonoBehaviour
     // The two tanks
     private GameObject tank1;
 
+    // Health
     public int Health = 100;
 
+    // Sprite renderer
     public SpriteRenderer sprender;
+
+    // GameOverScreen instance to access is game running
+    private GameOverScreen gameOverScreen;
 
     // Start is called before the first frame update
     void Start()
     {
         tank1 = GameObject.Find("Tank1");
+        gameOverScreen = FindObjectOfType<GameOverScreen>();
     }
 
     // Apply the specified damage to the tank's health
@@ -35,8 +41,11 @@ public class Tank2 : MonoBehaviour
         // Get tank if map has been redrawn
         tank1 = GameObject.Find("Tank1");
         // Fire if our turn
-        if (Input.GetKeyDown(KeyCode.Mouse0) && tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2
-            && GameObject.FindGameObjectWithTag("Projectile") == null)
+        if (Input.GetKeyDown(KeyCode.Mouse0)
+            && tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2
+            && GameObject.FindGameObjectWithTag("Projectile") == null
+            && !gameOverScreen.GameOver
+            )
         {
             // Spawn missile with arrow
             Vector3 missilePos = new Vector3(transform.localPosition.x - 1.5f,
