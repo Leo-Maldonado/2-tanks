@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1643733340517513813}
   - component: {fileID: 1643733340517513808}
-  - component: {fileID: 1643733340517513811}
   - component: {fileID: 1643733340517513810}
   - component: {fileID: -2798875421278413825}
+  - component: {fileID: 8249467335599176949}
+  - component: {fileID: 6628276642318956730}
   m_Layer: 0
   m_Name: Tank1
   m_TagString: Untagged
@@ -85,8 +86,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &1643733340517513811
-BoxCollider2D:
+--- !u!50 &1643733340517513810
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643733340517513812}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 20
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &-2798875421278413825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643733340517513812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b5c14c567ad54384bcd4e9be3ee12a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTurn: 0
+  missilePrefab: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
+  missileVelocity: 1
+  Health: 100
+  sprender: {fileID: 0}
+  movementSpeed: 5
+  slopeCheckDistance: 0.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+--- !u!60 &8249467335599176949
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,44 +152,66 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4.79, y: 1.12}
-  m_EdgeRadius: 0
---- !u!50 &1643733340517513810
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1643733340517513812}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 1
---- !u!114 &-2798875421278413825
-MonoBehaviour:
+  m_Points:
+    m_Paths:
+    - - {x: 1.1138625, y: -0.03443081}
+      - {x: 0.97499996, y: 0.13}
+      - {x: 0.825, y: 0.14999999}
+      - {x: -0.009630203, y: 0.21322727}
+      - {x: 1.1544014, y: 0.24000001}
+      - {x: 1.5153627, y: 0.23739338}
+      - {x: 1.52931, y: 0.3005399}
+      - {x: 1.54076, y: 0.37703896}
+      - {x: 1.271141, y: 0.3711834}
+      - {x: 0.51298714, y: 0.35928345}
+      - {x: 0.32973194, y: 0.35874265}
+      - {x: 0.29396248, y: 0.37317944}
+      - {x: 0.25901365, y: 0.38491032}
+      - {x: 0.1238637, y: 0.37371248}
+      - {x: 0.07565999, y: 0.39137623}
+      - {x: 0.030391693, y: 0.31041908}
+      - {x: 0.036858797, y: 0.34532943}
+      - {x: 0.049732924, y: 0.35886255}
+      - {x: 0.036199808, y: 0.36736453}
+      - {x: 0.03224659, y: 0.37149706}
+      - {x: 0.04835385, y: 0.3811969}
+      - {x: 0.055, y: 0.39}
+      - {x: 0.035, y: 0.42}
+      - {x: -0.074999996, y: 0.48999998}
+      - {x: -0.265, y: 0.53}
+      - {x: -0.695, y: 0.53999996}
+      - {x: -1.125, y: 0.53999996}
+      - {x: -1.225, y: 0.52}
+      - {x: -1.355, y: 0.42999998}
+      - {x: -1.435, y: 0.29}
+      - {x: -2.385, y: 0.28}
+      - {x: -2.385, y: 0.03}
+      - {x: -2.2849998, y: -0.04}
+      - {x: -2.268533, y: -0.2197612}
+      - {x: -2.20973, y: -0.24005947}
+      - {x: -2.0714073, y: -0.30329433}
+      - {x: -1.6789646, y: -0.43357563}
+      - {x: -1.4476166, y: -0.50386715}
+      - {x: -1.0188503, y: -0.5229435}
+      - {x: -0.7737436, y: -0.5208977}
+      - {x: 0.13050783, y: -0.50149614}
+      - {x: 0.56625634, y: -0.43383235}
+      - {x: 0.7360668, y: -0.36039162}
+      - {x: 1.0055984, y: -0.18443081}
+      - {x: 1.0703294, y: -0.1105994}
+--- !u!70 &6628276642318956730
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1643733340517513812}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b5c14c567ad54384bcd4e9be3ee12a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTurn: 0
-  missilePrefab: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
-  missileVelocity: 1
-  Health: 100
-  sprender: {fileID: 0}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.71461105, y: -0.001616478}
+  m_Size: {x: 2.1061687, y: 1.0595531}
+  m_Direction: 0

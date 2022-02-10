@@ -22,17 +22,45 @@ public class Tank2 : MonoBehaviour
     // GameOverScreen instance to access is game running
     private GameOverScreen gameOverScreen;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        tank1 = GameObject.Find("Tank1");
-        gameOverScreen = FindObjectOfType<GameOverScreen>();
-    }
+    // Our rigidbody
+    private Rigidbody2D rigidBody;
+
+    // Speed for movement
+    public float movementSpeed;
+
+    // Our polygon collider
+    private CapsuleCollider2D capCollider;
+
+    // If we are on a slope
+    private bool isOnSlope;
+
+    // Direction we are facing
+    private float facingDirection = -1;
+
+    // The x input
+    private float xInput;
+
+    // Slope check distance
+    [SerializeField]
+    private float slopeCheckDistance;
+
+    // Layermask holding ground layer
+    [SerializeField]
+    private LayerMask whatIsGround;
 
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
     {
         this.Health -= damage;
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        tank1 = GameObject.Find("Tank1");
+        gameOverScreen = FindObjectOfType<GameOverScreen>();
+        rigidBody = GetComponent<Rigidbody2D>();
+        capCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -61,6 +89,72 @@ public class Tank2 : MonoBehaviour
             sprender = gameObject.GetComponent<SpriteRenderer>();
             sprender.enabled = false;
         }
+        // Input
+        xInput = Input.GetAxisRaw("Horizontal");
 
+    }
+
+    // FixedUpdate for movement
+    void FixedUpdate()
+    {
+        // Get tank if map has been redrawn
+        tank1 = GameObject.Find("Tank1");
+        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2 && GameObject.FindGameObjectWithTag("Projectile") == null)
+        {
+            Flip();
+            SlopeCheck();
+            ApplyMovement();
+        }
+    }
+
+    // Check if we are on a slope
+    void SlopeCheck()
+    {
+        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, capCollider.size.y / 2));
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
+        if (slopeHitFront || slopeHitBack)
+        {
+            isOnSlope = true;
+        }
+        else
+        {
+            isOnSlope = false;
+        }
+    }
+
+    // Movement based on if we are on a slope or not
+    void ApplyMovement()
+    {
+        if (!isOnSlope)
+        {
+            rigidBody.velocity = new Vector2(movementSpeed * xInput, 0.0f);
+        }
+        else
+        {
+            if (xInput == 1)
+            {
+                rigidBody.velocity = new Vector2(movementSpeed * -0.8f * -xInput, movementSpeed * -0.8f * -xInput);
+            }
+            else
+            {
+                rigidBody.velocity = new Vector2(movementSpeed * -0.8f * -xInput, movementSpeed * 0.8f * -xInput);
+            }
+        }
+    }
+
+    void Flip()
+    {
+        // Flip so we always face forward
+        if (xInput == 1 && facingDirection == -1)
+        {
+            facingDirection *= -1;
+            transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
+        else if (xInput == -1 && facingDirection == 1)
+        {
+            facingDirection *= -1;
+            transform.Rotate(0.0f, 180.0f, 0.0f);
+        }
     }
 }

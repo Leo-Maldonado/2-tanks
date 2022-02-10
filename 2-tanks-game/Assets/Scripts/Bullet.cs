@@ -75,7 +75,6 @@ public class Bullet : MonoBehaviour
     {
         if (transform.position.x < -16f || transform.position.x > 37f)
         {
-
             Destroy(this.gameObject);
             Destroy(FindObjectOfType<Arrow>().gameObject);
         }
