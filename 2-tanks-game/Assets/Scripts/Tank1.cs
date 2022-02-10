@@ -102,7 +102,6 @@ public class Tank1 : MonoBehaviour
     {
         if (playerTurn == PlayersTurn.Tank1 && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
-            Debug.Log(isOnSlope);
             Flip();
             SlopeCheck();
             ApplyMovement();
