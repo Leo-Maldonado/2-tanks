@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4478302489595721616}
   - component: {fileID: 6071757764243876188}
   - component: {fileID: 3585235281902555396}
-  - component: {fileID: -3422847732235940640}
   m_Layer: 0
   m_Name: Tank2
   m_TagString: Untagged
@@ -191,26 +190,10 @@ PolygonCollider2D:
       - {x: -2.0714073, y: -0.30329433}
       - {x: -1.6789646, y: -0.43357563}
       - {x: -1.4476166, y: -0.50386715}
-      - {x: -1.0188503, y: -0.5229435}
-      - {x: -0.7737436, y: -0.5208977}
-      - {x: 0.13050783, y: -0.50149614}
+      - {x: -0.9800482, y: -0.55204487}
+      - {x: -0.70907307, y: -0.553232}
+      - {x: -0.23164809, y: -0.5564659}
       - {x: 0.56625634, y: -0.43383235}
       - {x: 0.7360668, y: -0.36039162}
       - {x: 1.0055984, y: -0.18443081}
       - {x: 1.0703294, y: -0.1105994}
---- !u!70 &-3422847732235940640
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4478302489595721622}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.71461105, y: -0.001616478}
-  m_Size: {x: 2.1061687, y: 1.0595531}
-  m_Direction: 0

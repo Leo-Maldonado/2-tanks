@@ -28,9 +28,6 @@ public class Tank2 : MonoBehaviour
     // Speed for movement
     public float movementSpeed;
 
-    // Our polygon collider
-    private CapsuleCollider2D capCollider;
-
     // If we are on a slope
     private bool isOnSlope;
 
@@ -60,7 +57,6 @@ public class Tank2 : MonoBehaviour
         tank1 = GameObject.Find("Tank1");
         gameOverScreen = FindObjectOfType<GameOverScreen>();
         rigidBody = GetComponent<Rigidbody2D>();
-        capCollider = GetComponent<CapsuleCollider2D>();
     }
 
     // Update is called once per frame
@@ -110,7 +106,7 @@ public class Tank2 : MonoBehaviour
     // Check if we are on a slope
     void SlopeCheck()
     {
-        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, capCollider.size.y / 2));
+        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, 0.5f)); //Y value is height / 2
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
         if (slopeHitFront || slopeHitBack)
@@ -150,11 +146,13 @@ public class Tank2 : MonoBehaviour
         {
             facingDirection *= -1;
             transform.Rotate(0.0f, 180.0f, 0.0f);
+            transform.position = transform.position + new Vector3(0.5f, 0);
         }
         else if (xInput == -1 && facingDirection == 1)
         {
             facingDirection *= -1;
             transform.Rotate(0.0f, 180.0f, 0.0f);
+            transform.position = transform.position + new Vector3(-0.5f, 0);
         }
     }
 }
