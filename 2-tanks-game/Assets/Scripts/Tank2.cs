@@ -75,7 +75,7 @@ public class Tank2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2)
+        if(tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2 && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
