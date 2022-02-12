@@ -55,6 +55,9 @@ public class Tank1 : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
 
+    public enum BulletType { Bullet1, Bullet2, Bullet3 };
+
+    public BulletType bullet = BulletType.Bullet1;
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
     {
@@ -71,6 +74,26 @@ public class Tank1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(playerTurn == PlayersTurn.Tank1)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                this.bullet = BulletType.Bullet1;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                this.bullet = BulletType.Bullet2;
+
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                this.bullet = BulletType.Bullet3;
+
+            }
+        }
+    
+
+
         // Display last shot position
         if (GameObject.FindGameObjectWithTag("Projectile") == null
             && playerTurn == PlayersTurn.Tank1
@@ -98,8 +121,25 @@ public class Tank1 : MonoBehaviour
             // Spawn missile in the direction of the arrow (which is also the direction of the mouse)
             Vector3 missilePos = transform.position + relativeMousePos.normalized * 2;
             GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
+            var normalizedPos = relativeMousePos.normalized;
+            float rotation = Mathf.Atan2(normalizedPos.y, normalizedPos.x) * Mathf.Rad2Deg;
+            //missile.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, rotation * -1);
             // Add velocity to the missile
             missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
+            if(this.bullet == BulletType.Bullet1)
+            {
+                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet1;
+            }
+            if (this.bullet == BulletType.Bullet2)
+            {
+                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet2;
+            }
+            if (this.bullet == BulletType.Bullet3)
+            {
+                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet3;
+            }
+
+
             playerTurn = PlayersTurn.Tank2;
         }
         // If we lost

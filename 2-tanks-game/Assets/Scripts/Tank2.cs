@@ -54,6 +54,10 @@ public class Tank2 : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
 
+    public enum BulletType { Bullet1, Bullet2, Bullet3 };
+
+    public BulletType bullet = BulletType.Bullet1;
+
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
     {
@@ -71,6 +75,26 @@ public class Tank2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                this.bullet = BulletType.Bullet1;
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                this.bullet = BulletType.Bullet2;
+
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                this.bullet = BulletType.Bullet3;
+
+            }
+        }
+        
+
+
         // Get tank if map has been redrawn
         tank1 = GameObject.Find("Tank1");
         // Display last shot position
@@ -102,7 +126,22 @@ public class Tank2 : MonoBehaviour
             GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
             // Add velocity to the missile
             missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
+            missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet1;
+            if (this.bullet == BulletType.Bullet1)
+            {
+                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet1;
+            }
+            if (this.bullet == BulletType.Bullet2)
+            {
+                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet2;
+            }
+            if (this.bullet == BulletType.Bullet3)
+            {
+                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet3;
+            }
+
             tank1.GetComponent<Tank1>().playerTurn = Tank1.PlayersTurn.Tank1;
+
         }
         if(this.Health <= 0)
         {
