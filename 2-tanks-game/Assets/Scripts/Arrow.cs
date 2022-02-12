@@ -7,6 +7,12 @@ public class Arrow : MonoBehaviour
     // Rigidbody
     private Rigidbody2D rigidBody;
 
+    // Min and max arrow scales
+    private float maxXScale = 3.5f;
+    private float maxYScale = 3.5f;
+    private float minXScale = 1;
+    private float minYScale = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,22 +30,22 @@ public class Arrow : MonoBehaviour
         {
             //Scale
             float dist = Vector3.Distance(tank1.transform.position, mousePos);
-            float xScale = Mathf.Max(1f, dist / 20);
-            float yScale = Mathf.Max(0.25f, dist / 15);
+            float xScale = Mathf.Min(maxXScale, Mathf.Max(minXScale, Mathf.Pow(dist / 10, 2)));
+            float yScale = Mathf.Min(maxYScale, Mathf.Max(minYScale, Mathf.Pow(dist / 10, 2)));
             transform.localScale = new Vector3(xScale, yScale);
             //Follow tank
-            Vector3 moveTo = new Vector3(tank1.transform.position.x + 1.5f, tank1.transform.position.y + 1.5f);
+            Vector3 moveTo = new Vector3(tank1.transform.position.x, tank1.transform.position.y);
             transform.position = Vector3.MoveTowards(transform.position, moveTo, .1f);
         }
         if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2 && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             //Scale
             float dist = Vector3.Distance(tank2.transform.position, mousePos);
-            float xScale = Mathf.Max(1f, dist / 20);
-            float yScale = Mathf.Max(0.25f, dist / 15);
+            float xScale = Mathf.Min(maxXScale, Mathf.Max(minXScale, Mathf.Pow(dist / 10, 2)));
+            float yScale = Mathf.Min(maxYScale, Mathf.Max(minYScale, Mathf.Pow(dist / 10, 2)));
             transform.localScale = new Vector3(xScale, yScale);
             //Follow tank
-            Vector3 moveTo = new Vector3(tank2.transform.position.x - 1.5f, tank2.transform.position.y + 1.5f);
+            Vector3 moveTo = new Vector3(tank2.transform.position.x, tank2.transform.position.y);
             transform.position = Vector3.MoveTowards(transform.position, moveTo, .1f);
         }
     }

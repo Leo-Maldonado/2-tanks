@@ -28,12 +28,12 @@ public class Bullet : MonoBehaviour
             if (transform.position.x < -16f || transform.position.x > 37f || transform.position.y < 0f)
             {
                 Destroy(this.gameObject);
-                Destroy(FindObjectOfType<Arrow>().gameObject);
             }
         }
     }
 
     // Destroy the terrain wherever the bullet collides with the tilemap
+    // Also destroy terrain within the explosion radius when a tank is hit directly
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.GetComponent<Tilemap>())
@@ -54,19 +54,23 @@ public class Bullet : MonoBehaviour
                 tank2.GetComponent<Tank2>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
             }
             Destroy(this.gameObject);
-            Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         if (collision.gameObject.GetComponent<Tank1>())
         {
             tank1.GetComponent<Tank1>().TakeDamage(damage);
+            FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
             Destroy(this.gameObject);
-            Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         if (collision.gameObject.GetComponent<Tank2>())
         {
             tank2.GetComponent<Tank2>().TakeDamage(damage);
+            FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
             Destroy(this.gameObject);
-            Destroy(FindObjectOfType<Arrow>().gameObject);
+        }
+        // Destroy the projectile if it collides with a barrier
+        if (collision.collider.gameObject.tag == "Barrier")
+        {
+            Destroy(this.gameObject);
         }
     }
 
@@ -76,7 +80,6 @@ public class Bullet : MonoBehaviour
         if (transform.position.x < -16f || transform.position.x > 37f)
         {
             Destroy(this.gameObject);
-            Destroy(FindObjectOfType<Arrow>().gameObject);
         }
         else
         {

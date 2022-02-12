@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   missilePrefab: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
   missileVelocity: 1
+  ShotMarker: {fileID: 6259371487896229223, guid: 72d6d3fc3d2d64f51810c26f1f70cd8c, type: 3}
   Health: 100
   sprender: {fileID: 0}
   movementSpeed: 5

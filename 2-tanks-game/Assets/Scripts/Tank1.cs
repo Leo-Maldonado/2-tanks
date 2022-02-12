@@ -14,6 +14,15 @@ public class Tank1 : MonoBehaviour
     // Missile velocity
     public float missileVelocity;
 
+    // Object that marks where the player last shot
+    public GameObject ShotMarker;
+
+    // Object holding the last shot marker
+    private GameObject lastShotMarker;
+
+    // Position of the last shot
+    private Vector3 lastShot = new Vector3(0, 0, -100);
+
     // Health
     public int Health = 100;
 
@@ -62,6 +71,15 @@ public class Tank1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Display last shot position
+        if (GameObject.FindGameObjectWithTag("Projectile") == null
+            && playerTurn == PlayersTurn.Tank1
+            && !gameOverScreen.GameOver
+            && lastShot.z > 0
+            && ! lastShotMarker)
+        {
+            lastShotMarker = Instantiate(ShotMarker, lastShot, Quaternion.identity);
+        }
         // Shoot
         if (Input.GetKeyDown(KeyCode.Mouse0)
             && GameObject.FindGameObjectWithTag("Projectile") == null
@@ -69,12 +87,18 @@ public class Tank1 : MonoBehaviour
             && !gameOverScreen.GameOver
             )
         {
-            // Spawn missile with arrow
-            Vector3 missilePos = new Vector3(transform.localPosition.x + 1.5f,
-                                                transform.localPosition.y + 1.5f);
-            GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
+            // Get rid of the aiming arrow and last shot marker
+            Destroy(FindObjectOfType<Arrow>().gameObject);
+            Destroy(lastShotMarker);
+            // Update last shot position and make sure z coordinate is 1
+            lastShot = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            lastShot.z = 1;
             // Find mouse position relative to tank position
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            // Spawn missile in the direction of the arrow (which is also the direction of the mouse)
+            Vector3 missilePos = transform.position + relativeMousePos.normalized * 2;
+            GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
+            // Add velocity to the missile
             missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
             playerTurn = PlayersTurn.Tank2;
         }
