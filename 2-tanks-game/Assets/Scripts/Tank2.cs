@@ -93,8 +93,6 @@ public class Tank2 : MonoBehaviour
             }
         }
         
-
-
         // Get tank if map has been redrawn
         tank1 = GameObject.Find("Tank1");
         // Display last shot position
@@ -106,6 +104,7 @@ public class Tank2 : MonoBehaviour
         {
             lastShotMarker = Instantiate(ShotMarker, lastShot, Quaternion.identity);
         }
+
         // Fire if our turn
         if (Input.GetKeyDown(KeyCode.Mouse0)
             && tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2

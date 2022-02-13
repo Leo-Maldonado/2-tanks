@@ -91,8 +91,6 @@ public class Tank1 : MonoBehaviour
 
             }
         }
-    
-
 
         // Display last shot position
         if (GameObject.FindGameObjectWithTag("Projectile") == null
@@ -103,6 +101,7 @@ public class Tank1 : MonoBehaviour
         {
             lastShotMarker = Instantiate(ShotMarker, lastShot, Quaternion.identity);
         }
+
         // Shoot
         if (Input.GetKeyDown(KeyCode.Mouse0)
             && GameObject.FindGameObjectWithTag("Projectile") == null
@@ -123,7 +122,6 @@ public class Tank1 : MonoBehaviour
             GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
             var normalizedPos = relativeMousePos.normalized;
             float rotation = Mathf.Atan2(normalizedPos.y, normalizedPos.x) * Mathf.Rad2Deg;
-            //missile.GetComponent<Transform>().rotation = Quaternion.Euler(0f, 0f, rotation * -1);
             // Add velocity to the missile
             missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
             if(this.bullet == BulletType.Bullet1)
@@ -142,6 +140,7 @@ public class Tank1 : MonoBehaviour
 
             playerTurn = PlayersTurn.Tank2;
         }
+
         // If we lost
         if (this.Health <= 0)
         {
@@ -152,6 +151,7 @@ public class Tank1 : MonoBehaviour
         {
             Application.Quit();
         }
+
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
 
