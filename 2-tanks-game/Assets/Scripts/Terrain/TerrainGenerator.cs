@@ -64,16 +64,18 @@ public class TerrainGenerator : MonoBehaviour
         GameObject tank1 = GameObject.Find("Tank1");
         GameObject tank2 = GameObject.Find("Tank2");
 
-        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank1 && FindObjectOfType<Arrow>() == null)
+        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank1
+            && FindObjectOfType<Arrow>() == null)
         {
             // Instantiate in front of tank
-            Vector3 arrowPos = new Vector3(tank1.transform.position.x + 1.3f, tank1.transform.position.y + 0.3f);
+            Vector3 arrowPos = new Vector3(tank1.transform.position.x, tank1.transform.position.y);
             GameObject arw = Instantiate(arrow, arrowPos, Quaternion.identity);
         }
-        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2 && FindObjectOfType<Arrow>() == null)
+        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2
+            && FindObjectOfType<Arrow>() == null)
         {
             // Instantiate in front of tank
-            Vector3 arrowPos = new Vector3(tank2.transform.position.x - 1.3f, tank2.transform.position.y + 0.3f);
+            Vector3 arrowPos = new Vector3(tank2.transform.position.x, tank2.transform.position.y);
             GameObject arw = Instantiate(arrow, arrowPos, Quaternion.identity);
         }
     }

@@ -34,7 +34,7 @@ public class Arrow : MonoBehaviour
             float yScale = Mathf.Min(maxYScale, Mathf.Max(minYScale, Mathf.Pow(dist / 10, 2)));
             transform.localScale = new Vector3(xScale, yScale);
             //Follow tank
-            Vector3 moveTo = new Vector3(tank1.transform.position.x + 1.3f, tank1.transform.position.y + 0.3f);
+            Vector3 moveTo = new Vector3(tank1.transform.position.x, tank1.transform.position.y);
             transform.position = Vector3.MoveTowards(transform.position, moveTo, .1f);
         }
         if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2 && GameObject.FindGameObjectWithTag("Projectile") == null)
@@ -45,7 +45,7 @@ public class Arrow : MonoBehaviour
             float yScale = Mathf.Min(maxYScale, Mathf.Max(minYScale, Mathf.Pow(dist / 10, 2)));
             transform.localScale = new Vector3(xScale, yScale);
             //Follow tank
-            Vector3 moveTo = new Vector3(tank2.transform.position.x - 1.3f, tank2.transform.position.y + 0.3f);
+            Vector3 moveTo = new Vector3(tank2.transform.position.x, tank2.transform.position.y);
             transform.position = Vector3.MoveTowards(transform.position, moveTo, .1f);
         }
     }

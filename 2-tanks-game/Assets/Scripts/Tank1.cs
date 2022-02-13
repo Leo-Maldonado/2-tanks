@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Tank1 : MonoBehaviour
 {
+    // Boolean to disable shooting (for testing)
+    public bool testing = false;
+
     // Which tanks turn it is to shoot
     public PlayersTurn playerTurn = PlayersTurn.Tank1;
     public enum PlayersTurn { Tank1, Tank2 }
@@ -97,7 +100,8 @@ public class Tank1 : MonoBehaviour
             && playerTurn == PlayersTurn.Tank1
             && !gameOverScreen.GameOver
             && lastShot.z > 0
-            && ! lastShotMarker)
+            && ! lastShotMarker
+            && !testing)
         {
             lastShotMarker = Instantiate(ShotMarker, lastShot, Quaternion.identity);
         }
@@ -107,7 +111,7 @@ public class Tank1 : MonoBehaviour
             && GameObject.FindGameObjectWithTag("Projectile") == null
             && playerTurn == PlayersTurn.Tank1
             && !gameOverScreen.GameOver
-            )
+            && !testing)
         {
             // Get rid of the aiming arrow and last shot marker
             Destroy(FindObjectOfType<Arrow>().gameObject);

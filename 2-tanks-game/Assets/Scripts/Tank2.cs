@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Tank2 : MonoBehaviour
 {
+    // Boolean to disable shooting (for testing)
+    public bool testing = false;
+
     // Missile
     public GameObject missilePrefab;
 
@@ -100,7 +103,8 @@ public class Tank2 : MonoBehaviour
             && tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2
             && !gameOverScreen.GameOver
             && lastShot.z > 0
-            && !lastShotMarker)
+            && !lastShotMarker
+            && !testing)
         {
             lastShotMarker = Instantiate(ShotMarker, lastShot, Quaternion.identity);
         }
@@ -110,7 +114,7 @@ public class Tank2 : MonoBehaviour
             && tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2
             && GameObject.FindGameObjectWithTag("Projectile") == null
             && !gameOverScreen.GameOver
-            )
+            && !testing)
         {
             // Get rid of the aiming arrow and last shot marker
             Destroy(FindObjectOfType<Arrow>().gameObject);
