@@ -11,8 +11,11 @@ public class Tank1 : MonoBehaviour
     public PlayersTurn playerTurn = PlayersTurn.Tank1;
     public enum PlayersTurn { Tank1, Tank2 }
 
-    // Missile
-    public GameObject missilePrefab;
+    // Current missile
+    public GameObject currentMissile;
+
+    // Missile manager
+    private MissileManager missileManager;
 
     // Missile velocity
     public float missileVelocity;
@@ -58,9 +61,6 @@ public class Tank1 : MonoBehaviour
     [SerializeField]
     private LayerMask whatIsGround;
 
-    public enum BulletType { Bullet1, Bullet2, Bullet3 };
-
-    public BulletType bullet = BulletType.Bullet1;
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
     {
@@ -72,6 +72,7 @@ public class Tank1 : MonoBehaviour
     {
         gameOverScreen = FindObjectOfType<GameOverScreen>();
         rigidBody = GetComponent<Rigidbody2D>();
+        missileManager = FindObjectOfType<MissileManager>();
     }
 
     // Update is called once per frame
@@ -81,16 +82,16 @@ public class Tank1 : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                this.bullet = BulletType.Bullet1;
+                currentMissile = missileManager.missile1;
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                this.bullet = BulletType.Bullet2;
+                currentMissile = missileManager.missile2;
 
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                this.bullet = BulletType.Bullet3;
+                currentMissile = missileManager.missile3;
 
             }
         }
@@ -123,25 +124,9 @@ public class Tank1 : MonoBehaviour
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
             // Spawn missile in the direction of the arrow (which is also the direction of the mouse)
             Vector3 missilePos = transform.position + relativeMousePos.normalized * 2;
-            GameObject missile = Instantiate(missilePrefab, missilePos, Quaternion.identity);
-            var normalizedPos = relativeMousePos.normalized;
-            float rotation = Mathf.Atan2(normalizedPos.y, normalizedPos.x) * Mathf.Rad2Deg;
+            GameObject missile = Instantiate(currentMissile, missilePos, Quaternion.identity);
             // Add velocity to the missile
             missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
-            if(this.bullet == BulletType.Bullet1)
-            {
-                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet1;
-            }
-            if (this.bullet == BulletType.Bullet2)
-            {
-                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet2;
-            }
-            if (this.bullet == BulletType.Bullet3)
-            {
-                missile.GetComponent<Bullet>().bullet = Bullet.BulletType.Bullet3;
-            }
-
-
             playerTurn = PlayersTurn.Tank2;
         }
 

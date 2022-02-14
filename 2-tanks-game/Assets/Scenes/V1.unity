@@ -410,6 +410,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e4bbc689581de4ab429dc3de242a09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &595987053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 595987055}
+  - component: {fileID: 595987054}
+  m_Layer: 0
+  m_Name: MissileManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &595987054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595987053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bae8584201fd046d49a928b3804fda3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missile1: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
+  missile2: {fileID: 5725846938665835003, guid: b0ef723295fc24b13ac920e0872d1715, type: 3}
+  missile3: {fileID: 8451944392418705572, guid: 051faf7602bea4b63803acb31d10e9f9, type: 3}
+--- !u!4 &595987055
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 595987053}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.92893, y: 7.5420413, z: -83.39925}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &615744149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1221,7 +1267,6 @@ MonoBehaviour:
   tank2: {fileID: 0}
   ChoiceUI: {fileID: 3327685565020412971, guid: f87487acc62df8e44a11da7d681c24b5, type: 3}
   UI1: {fileID: 0}
-  bulletType: 0
 --- !u!1 &1967001552
 GameObject:
   m_ObjectHideFlags: 0
@@ -1438,7 +1483,6 @@ MonoBehaviour:
   tank1: {fileID: 0}
   ChoiceUI: {fileID: 3327685565020412971, guid: f87487acc62df8e44a11da7d681c24b5, type: 3}
   UI1: {fileID: 0}
-  bulletType: 0
 --- !u!1001 &2035767485
 PrefabInstance:
   m_ObjectHideFlags: 0

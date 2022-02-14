@@ -10,27 +10,27 @@ public class Player1Missile : MonoBehaviour
     public GameObject ChoiceUI;
 
     public GameObject UI1;
-    // Start is called before the first frame update
 
-    public Tank1.BulletType bulletType;
+    // Missile that is being displayed
+    private GameObject displayedMissile;
+    
     void Start()
     {
-        this.tank1 = GameObject.Find("Tank1");
+        tank1 = GameObject.Find("Tank1");
         Vector3 spawnPos = new Vector3(-6f, 20.5f, 0f);
         UI1 = Instantiate(ChoiceUI, spawnPos, Quaternion.identity);
-        this.bulletType = Tank1.BulletType.Bullet1;
-        UI1.GetComponent<MissileChoiceUI>().Player1Change(Tank1.BulletType.Bullet1);
+        displayedMissile = tank1.GetComponent<Tank1>().currentMissile;
+        UI1.GetComponent<MissileChoiceUI>().Player1Change(displayedMissile);
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.tank1 = GameObject.Find("Tank1");
-        if (this.tank1.GetComponent<Tank1>().bullet != this.bulletType)
+        tank1 = GameObject.Find("Tank1");
+        if (tank1.GetComponent<Tank1>().currentMissile != displayedMissile)
         {
-            this.bulletType = this.tank1.GetComponent<Tank1>().bullet;
-            UI1.GetComponent<MissileChoiceUI>().Player1Change(this.bulletType);
+            displayedMissile = tank1.GetComponent<Tank1>().currentMissile;
+            UI1.GetComponent<MissileChoiceUI>().Player1Change(displayedMissile);
         }
-
     }
 }
