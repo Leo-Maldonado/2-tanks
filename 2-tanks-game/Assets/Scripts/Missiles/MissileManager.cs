@@ -10,4 +10,6 @@ public class MissileManager : MonoBehaviour
     public GameObject missile2;
 
     public GameObject missile3;
+
+    public GameObject missile4;
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
 public class TerrainGenerator : MonoBehaviour
 {
@@ -48,13 +49,10 @@ public class TerrainGenerator : MonoBehaviour
             SpawnArrow();
         }
 
-        // For now, generate new terrain every time the space bar is pressed
+        // For now, reload the scene whenever space bar is pressed
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            GenerateTerrain();
-            // Remove arrow and spawn
-            Destroy(FindObjectOfType<Arrow>().gameObject);
-            SpawnArrow();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 

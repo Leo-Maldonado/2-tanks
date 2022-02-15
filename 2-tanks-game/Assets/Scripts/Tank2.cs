@@ -94,6 +94,11 @@ public class Tank2 : MonoBehaviour
                 currentMissile = missileManager.missile3;
 
             }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                currentMissile = missileManager.missile4;
+
+            }
         }
         
         // Get tank if map has been redrawn

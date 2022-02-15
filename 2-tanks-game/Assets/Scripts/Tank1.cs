@@ -94,6 +94,11 @@ public class Tank1 : MonoBehaviour
                 currentMissile = missileManager.missile3;
 
             }
+            if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                currentMissile = missileManager.missile4;
+
+            }
         }
 
         // Display last shot position

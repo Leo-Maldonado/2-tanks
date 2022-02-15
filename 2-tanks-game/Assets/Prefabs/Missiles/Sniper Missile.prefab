@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5935679491020247491}
   - component: {fileID: 8328704876233384546}
   m_Layer: 0
-  m_Name: SniperMissile
+  m_Name: Sniper Missile
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

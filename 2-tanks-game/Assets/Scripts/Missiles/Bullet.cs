@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     public int explosionRadius = 3;
     // How much damage the projectile does when it directly hits a tank
     public int damage = 30;
+    // Angle added to the rotation (to rotate sprites that aren't originally oriented correctly)
+    public int angleOffset = 0;
 
     public bool IsInvisible = false;
 
@@ -29,7 +31,7 @@ public class Bullet : MonoBehaviour
     {
         var dir = -1 * rigid.velocity;
         var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(angle + angleOffset, Vector3.forward);
         if(IsInvisible == true)
         {
             if (transform.position.x < -16f || transform.position.x > 37f || transform.position.y < 0f)
@@ -64,27 +66,15 @@ public class Bullet : MonoBehaviour
         }
         if (collision.gameObject.GetComponent<Tank1>())
         {
-            //this seems counter inteuitive, to damage tank2 only when it is its turn. But the way the tanks change is right after they
-            //shoot, so by the time it notices the collision, the player turn has already changed
-            if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank1)
-            {
-                tank1.GetComponent<Tank1>().TakeDamage(damage);
-                FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
-                Destroy(this.gameObject);
-            }
-              
-   
+            tank1.GetComponent<Tank1>().TakeDamage(damage);
+            FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
+            Destroy(this.gameObject); 
         }
         if (collision.gameObject.GetComponent<Tank2>())
         {
-            //this seems counter inteuitive, to damage tank2 only when it is its turn. But the way the tanks change is right after they
-            //shoot, so by the time it notices the collision, the player turn has already changed
-            if(tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2)
-            {
-                tank2.GetComponent<Tank2>().TakeDamage(damage);
-                FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
-                Destroy(this.gameObject);
-            }
+            tank2.GetComponent<Tank2>().TakeDamage(damage);
+            FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
+            Destroy(this.gameObject);
         }
         // Destroy the projectile if it collides with a barrier
         if (collision.collider.gameObject.tag == "Barrier")
