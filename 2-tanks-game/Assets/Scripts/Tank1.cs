@@ -67,6 +67,7 @@ public class Tank1 : MonoBehaviour
     // If player has earned turn points this turn
     private bool hasEarnedPoints = false;
 
+
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
     {
@@ -192,7 +193,6 @@ public class Tank1 : MonoBehaviour
         if (purchased)
         {
             currentMissile = missile;
-            turnPoints -= missileManager.missiles[missile];
         }
         else
         {
@@ -275,12 +275,49 @@ public class Tank1 : MonoBehaviour
             // Find mouse position relative to tank position
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
+
+            //calculate rotation to spawn with
+            var dir = -1 * rigidBody.velocity;
+            var angle = Mathf.Atan2(relativeMousePos.y, relativeMousePos.x) * Mathf.Rad2Deg;
+            Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
+
             // Spawn missile in the direction of the arrow (which is also the direction of the mouse)
-            Vector3 missilePos = transform.position + relativeMousePos.normalized * 2;
+            Vector3 normalized = relativeMousePos.normalized;
+            Vector3 missilePos = transform.position + normalized * 4f;
             GameObject missile = Instantiate(currentMissile, missilePos, Quaternion.identity);
 
+            //charge player for purchasing missile
+            turnPoints -= missileManager.missiles[currentMissile];
+
+            
+            //find distance between mouse and tank
+            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            float xDist =  mousePos.x - transform.position.x;
+            float yDist = mousePos.y - transform.position.y;
+
+            //clamp relativeMousePos to max/min values (got these just from testing in scene they're not perfect, but more than good enough i think)
+            float xVelo = Mathf.Clamp(xDist, 0.025f, 16f);
+            float yVelo = Mathf.Clamp(yDist, .025f, 16f);
+
+            if (xDist < 0)
+            {
+                xVelo = Mathf.Clamp(xDist, -16f, -.025f);
+            }
+            if (yDist < 0)
+            {
+                yVelo = Mathf.Clamp(yDist, -16f, -.025f);
+            }
+
+            //scales to better fit velocity, 4.6f comes from scaling 1f-16f to 1f-3.5f
+            //multiply bu 7.5f to make it actually have velocity, came to 7.5f through testing
+            xVelo /= 4.6f;
+            yVelo /= 4.6f;
+            xVelo *= 7.5f;
+            yVelo *= 7.5f;
+
+            Vector3 vector = new Vector3(xVelo, yVelo, 0.0f);
             // Add velocity to the missile
-            missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * relativeMousePos;
+            missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * vector;
             playerTurn = PlayersTurn.Tank2;
         }
     }
