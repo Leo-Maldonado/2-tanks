@@ -931,6 +931,7 @@ GameObject:
   - component: {fileID: 1311970910}
   - component: {fileID: 1311970912}
   - component: {fileID: 1311970911}
+  - component: {fileID: 1311970913}
   m_Layer: 5
   m_Name: Player2 TurnPoints
   m_TagString: Untagged
@@ -1054,6 +1055,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1311970909}
   m_CullTransparentMesh: 1
+--- !u!114 &1311970913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1311970909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55d5cc0da93fc458dbc3d04c34a5335c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1654328911
 GameObject:
   m_ObjectHideFlags: 0
