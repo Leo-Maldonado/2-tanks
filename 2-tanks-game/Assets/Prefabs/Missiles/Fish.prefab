@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 3
   damage: 30
+  angleOffset: 0
   IsInvisible: 0
   rigid: {fileID: 0}
 --- !u!60 &2432396971577233539
