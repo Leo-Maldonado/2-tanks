@@ -39,11 +39,11 @@ public class GameOverScreen : MonoBehaviour
     {
         int t1health;
         tank1 = GameObject.Find("Tank1");
-        t1health = tank1.GetComponent<Tank1>().Health;
+        t1health = tank1.GetComponent<Tank>().Health;
 
         int t2health;
         tank2 = GameObject.Find("Tank2");
-        t2health = tank2.GetComponent<Tank2>().Health;
+        t2health = tank2.GetComponent<Tank>().Health;
 
         if(t1health <= 0)
         {

@@ -18,7 +18,7 @@ public class Player2Missile : MonoBehaviour
         tank2 = GameObject.Find("Tank2");
         Vector3 spawnPos = new Vector3(34.5f, 20.5f, 0f);
         UI1 = Instantiate(ChoiceUI, spawnPos, Quaternion.identity);
-        displayedMissile = tank2.GetComponent<Tank2>().currentMissile;
+        displayedMissile = tank2.GetComponent<Tank>().currentMissile;
         UI1.GetComponent<MissileChoiceUI>().Player2Change(displayedMissile);
     }
 
@@ -26,9 +26,9 @@ public class Player2Missile : MonoBehaviour
     void Update()
     {
         tank2 = GameObject.Find("Tank2");
-        if (this.tank2.GetComponent<Tank2>().currentMissile != displayedMissile)
+        if (this.tank2.GetComponent<Tank>().currentMissile != displayedMissile)
         {
-            displayedMissile = this.tank2.GetComponent<Tank2>().currentMissile;
+            displayedMissile = this.tank2.GetComponent<Tank>().currentMissile;
             UI1.GetComponent<MissileChoiceUI>().Player2Change(displayedMissile);
         }
     }

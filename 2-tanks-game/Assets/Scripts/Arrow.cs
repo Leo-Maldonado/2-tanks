@@ -13,10 +13,14 @@ public class Arrow : MonoBehaviour
     private float minXScale = 1;
     private float minYScale = 1;
 
+    // Turn manager to find out who's turn it is
+    private TurnManager turnManager;
+
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        turnManager = GameObject.FindObjectOfType<TurnManager>();
     }
 
     // Update is called once per frame
@@ -26,7 +30,7 @@ public class Arrow : MonoBehaviour
         GameObject tank1 = GameObject.Find("Tank1");
         GameObject tank2 = GameObject.Find("Tank2");
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank1 && GameObject.FindGameObjectWithTag("Projectile") == null)
+        if (turnManager.IsPlayerTurn(1) && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             //Scale
             float dist = Vector3.Distance(tank1.transform.position, mousePos);
@@ -37,7 +41,7 @@ public class Arrow : MonoBehaviour
             Vector3 moveTo = new Vector3(tank1.transform.position.x, tank1.transform.position.y);
             transform.position = Vector3.MoveTowards(transform.position, moveTo, .1f);
         }
-        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2 && GameObject.FindGameObjectWithTag("Projectile") == null)
+        if (turnManager.IsPlayerTurn(2) && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             //Scale
             float dist = Vector3.Distance(tank2.transform.position, mousePos);

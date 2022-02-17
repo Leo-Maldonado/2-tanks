@@ -23,9 +23,9 @@ public class MissileSpawner : MonoBehaviour
     private void Start()
     {
         missile = M1;
-        GameObject.FindObjectOfType<Tank1>().testing = true;
-        GameObject.FindObjectOfType<Tank2>().testing = true;
-        foreach(Arrow arrow in GameObject.FindObjectsOfType<Arrow>())
+        GameObject.Find("Tank1").GetComponent<Tank>().testing = true;
+        GameObject.Find("Tank2").GetComponent<Tank>().testing = true;
+        foreach (Arrow arrow in GameObject.FindObjectsOfType<Arrow>())
         {
             arrow.GetComponent<SpriteRenderer>().enabled = false;
         }

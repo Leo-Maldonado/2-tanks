@@ -55,24 +55,26 @@ public class Bullet : MonoBehaviour
             if (tank1Distance < explosionRadius)
             {
                 float damageScale = (explosionRadius - tank1Distance) / explosionRadius;
-                tank1.GetComponent<Tank1>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
+                tank1.GetComponent<Tank>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
             }
             if (tank2Distance < explosionRadius)
             {
                 float damageScale = (explosionRadius - tank2Distance) / explosionRadius;
-                tank2.GetComponent<Tank2>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
+                tank2.GetComponent<Tank>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
             }
             Destroy(this.gameObject);
         }
-        if (collision.gameObject.GetComponent<Tank1>())
+        if (collision.gameObject.GetComponent<Tank>())
         {
-            tank1.GetComponent<Tank1>().TakeDamage(damage);
-            FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
-            Destroy(this.gameObject); 
-        }
-        if (collision.gameObject.GetComponent<Tank2>())
-        {
-            tank2.GetComponent<Tank2>().TakeDamage(damage);
+            int tank = collision.gameObject.GetComponent<Tank>().tankNumber;
+            if (tank == 1)
+            {
+                tank1.GetComponent<Tank>().TakeDamage(damage);
+            }
+            else if (tank == 2)
+            {
+                tank2.GetComponent<Tank>().TakeDamage(damage);
+            }
             FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
             Destroy(this.gameObject);
         }

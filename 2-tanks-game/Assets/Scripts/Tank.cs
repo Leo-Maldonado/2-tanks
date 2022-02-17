@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tank1 : MonoBehaviour
+public class Tank : MonoBehaviour
 {
+    // What number tank this is (used to determine whether or not it is this player's turn)
+    public int tankNumber;
+
     // Boolean to disable shooting (for testing)
     public bool testing = false;
-
-    // Which tanks turn it is to shoot
-    public PlayersTurn playerTurn = PlayersTurn.Tank1;
-    public enum PlayersTurn { Tank1, Tank2 }
 
     // Current missile
     public GameObject currentMissile;
@@ -31,6 +30,12 @@ public class Tank1 : MonoBehaviour
 
     // Health
     public int Health = 100;
+
+    // Whether or not it is this tank's turn
+    private bool playerTurn;
+
+    // Turn manager to check who's turn it is
+    private TurnManager turnManager;
 
     // Sprite Renderer
     public SpriteRenderer sprender;
@@ -85,6 +90,10 @@ public class Tank1 : MonoBehaviour
     // Start
     void Start()
     {
+        // Get turn manager
+        turnManager = GameObject.FindObjectOfType<TurnManager>();
+        // Tank 1 always gets the first turn
+        playerTurn = tankNumber == 1;
         gameOverScreen = FindObjectOfType<GameOverScreen>();
         rigidBody = GetComponent<Rigidbody2D>();
         missileManager = FindObjectOfType<MissileManager>();
@@ -93,6 +102,9 @@ public class Tank1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Update whether or not it is this tank's turn
+        playerTurn = turnManager.GetComponent<TurnManager>().IsPlayerTurn(tankNumber);
+
         // Correct turn points
         ManageTurnPoints();
 
@@ -124,7 +136,7 @@ public class Tank1 : MonoBehaviour
     // FixedUpdate for movement
     void FixedUpdate()
     {
-        if (playerTurn == PlayersTurn.Tank1 && GameObject.FindGameObjectWithTag("Projectile") == null)
+        if (playerTurn && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             Flip();
             SlopeCheck();
@@ -204,13 +216,13 @@ public class Tank1 : MonoBehaviour
     private void ManageTurnPoints()
     {
         // Get points if haven't already
-        if (playerTurn == PlayersTurn.Tank1 && !hasEarnedPoints)
+        if (playerTurn && !hasEarnedPoints)
         {
             turnPoints += 100;
             hasEarnedPoints = true;
         }
         // If its the other players turn, reset so we can earn next turn
-        if (playerTurn == PlayersTurn.Tank2)
+        if (!playerTurn)
         {
             hasEarnedPoints = false;
             currentMissile = missileManager.missile1;
@@ -220,7 +232,7 @@ public class Tank1 : MonoBehaviour
     // Choose missile
     private void ChooseMissile()
     {
-        if (playerTurn == PlayersTurn.Tank1 && GameObject.FindGameObjectWithTag("Projectile") == null)
+        if (playerTurn && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
@@ -245,7 +257,7 @@ public class Tank1 : MonoBehaviour
     private void DisplayLastShotPos()
     {
         if (GameObject.FindGameObjectWithTag("Projectile") == null
-            && playerTurn == PlayersTurn.Tank1
+            && playerTurn
             && !gameOverScreen.GameOver
             && lastShot.z > 0
             && !lastShotMarker
@@ -260,7 +272,7 @@ public class Tank1 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Mouse0)
             && GameObject.FindGameObjectWithTag("Projectile") == null
-            && playerTurn == PlayersTurn.Tank1
+            && playerTurn
             && !gameOverScreen.GameOver
             && !testing)
         {
@@ -289,10 +301,10 @@ public class Tank1 : MonoBehaviour
             //charge player for purchasing missile
             turnPoints -= missileManager.missiles[currentMissile];
 
-            
+
             //find distance between mouse and tank
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            float xDist =  mousePos.x - transform.position.x;
+            float xDist = mousePos.x - transform.position.x;
             float yDist = mousePos.y - transform.position.y;
 
             //clamp relativeMousePos to max/min values (got these just from testing in scene they're not perfect, but more than good enough i think)
@@ -318,7 +330,8 @@ public class Tank1 : MonoBehaviour
             Vector3 vector = new Vector3(xVelo, yVelo, 0.0f);
             // Add velocity to the missile
             missile.GetComponent<Rigidbody2D>().velocity = missileVelocity * vector;
-            playerTurn = PlayersTurn.Tank2;
+            // Change turns
+            turnManager.GetComponent<TurnManager>().ChangeTurns();
         }
     }
 }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1643733340517513813}
   - component: {fileID: 1643733340517513808}
   - component: {fileID: 1643733340517513810}
-  - component: {fileID: -2798875421278413825}
   - component: {fileID: 8249467335599176949}
+  - component: {fileID: -3853237937658910348}
   m_Layer: 0
   m_Name: Tank1
   m_TagString: Untagged
@@ -106,30 +106,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-2798875421278413825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1643733340517513812}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b5c14c567ad54384bcd4e9be3ee12a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testing: 0
-  playerTurn: 0
-  currentMissile: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
-  missileVelocity: 1
-  ShotMarker: {fileID: 6259371487896229223, guid: 72d6d3fc3d2d64f51810c26f1f70cd8c, type: 3}
-  Health: 100
-  sprender: {fileID: 0}
-  movementSpeed: 5
-  slopeCheckDistance: 0.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!60 &8249467335599176949
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -200,3 +176,28 @@ PolygonCollider2D:
       - {x: 0.7360668, y: -0.36039162}
       - {x: 1.0055984, y: -0.18443081}
       - {x: 1.0703294, y: -0.1105994}
+--- !u!114 &-3853237937658910348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643733340517513812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49b8c02514d6b4429810846ef8dea86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankNumber: 1
+  testing: 0
+  currentMissile: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
+  missileVelocity: 1
+  ShotMarker: {fileID: 6259371487896229223, guid: 72d6d3fc3d2d64f51810c26f1f70cd8c, type: 3}
+  Health: 100
+  sprender: {fileID: 0}
+  movementSpeed: 5
+  slopeCheckDistance: 0.5
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  turnPoints: 0

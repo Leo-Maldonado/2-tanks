@@ -24,7 +24,7 @@ public class Player2Health : MonoBehaviour
     void Update()
     {
         tank2 = GameObject.Find("Tank2");
-        t2health = tank2.GetComponent<Tank2>().Health;
+        t2health = tank2.GetComponent<Tank>().Health;
         TextComponent.text = "Player 2 Health: " + t2health;
     }
 }

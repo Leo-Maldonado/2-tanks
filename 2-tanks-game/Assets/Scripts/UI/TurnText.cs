@@ -5,27 +5,25 @@ using TMPro;
 
 public class TurnText : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    private GameObject tank1;
+    private TurnManager turnManager;
 
     private TMP_Text TextComponent;
 
     void Start()
     {
-        tank1 = GameObject.Find("Tank1");
+        turnManager = GameObject.FindObjectOfType<TurnManager>();
         TextComponent = GetComponent<TMP_Text>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        tank1 = GameObject.Find("Tank1");
-        if(tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2)
+        turnManager = GameObject.FindObjectOfType<TurnManager>();
+        if (turnManager.IsPlayerTurn(2))
         {
             TextComponent.text = "Turn: Tank 2";
         }
-        else if(tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank1)
+        else if(turnManager.IsPlayerTurn(1))
         {
             TextComponent.text = "Turn: Tank 1";
         }

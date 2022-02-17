@@ -28,6 +28,9 @@ public class TerrainGenerator : MonoBehaviour
     // The arrow to spawn
     public GameObject arrow;
 
+    // Turnmanager to check who's turn it is
+    public TurnManager turnManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,7 +47,7 @@ public class TerrainGenerator : MonoBehaviour
     void Update()
     {
         // Spawn arrows every turn if a player hasn't won yet
-        if (GameObject.Find("Tank1").GetComponent<Tank1>().Health > 0 && GameObject.Find("Tank2").GetComponent<Tank2>().Health > 0)
+        if (GameObject.Find("Tank1").GetComponent<Tank>().Health > 0 && GameObject.Find("Tank2").GetComponent<Tank>().Health > 0)
         {
             SpawnArrow();
         }
@@ -62,14 +65,14 @@ public class TerrainGenerator : MonoBehaviour
         GameObject tank1 = GameObject.Find("Tank1");
         GameObject tank2 = GameObject.Find("Tank2");
 
-        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank1
+        if (turnManager.IsPlayerTurn(1)
             && FindObjectOfType<Arrow>() == null)
         {
             // Instantiate in front of tank
             Vector3 arrowPos = new Vector3(tank1.transform.position.x, tank1.transform.position.y);
             GameObject arw = Instantiate(arrow, arrowPos, Quaternion.identity);
         }
-        if (tank1.GetComponent<Tank1>().playerTurn == Tank1.PlayersTurn.Tank2
+        if (turnManager.IsPlayerTurn(2)
             && FindObjectOfType<Arrow>() == null)
         {
             // Instantiate in front of tank
