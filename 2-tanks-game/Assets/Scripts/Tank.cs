@@ -184,17 +184,35 @@ public class Tank : MonoBehaviour
     void Flip()
     {
         // Flip so we always face forward
-        if (xInput == 1 && facingDirection == -1)
+        if (turnManager.IsPlayerTurn(1))
         {
-            facingDirection *= -1;
-            transform.Rotate(0.0f, 180.0f, 0.0f);
-            transform.position = transform.position + new Vector3(0.5f, 0);
+            if (xInput == 1 && facingDirection == -1)
+            {
+                facingDirection *= -1;
+                transform.Rotate(0.0f, 180.0f, 0.0f);
+                transform.position = transform.position + new Vector3(0.5f, 0);
+            }
+            else if (xInput == -1 && facingDirection == 1)
+            {
+                facingDirection *= -1;
+                transform.Rotate(0.0f, 180.0f, 0.0f);
+                transform.position = transform.position + new Vector3(-0.5f, 0);
+            }
         }
-        else if (xInput == -1 && facingDirection == 1)
+        else
         {
-            facingDirection *= -1;
-            transform.Rotate(0.0f, 180.0f, 0.0f);
-            transform.position = transform.position + new Vector3(-0.5f, 0);
+            if (xInput == 1 && facingDirection == 1)
+            {
+                facingDirection *= -1;
+                transform.Rotate(0.0f, 180.0f, 0.0f);
+                transform.position = transform.position + new Vector3(0.5f, 0);
+            }
+            else if (xInput == -1 && facingDirection == -1)
+            {
+                facingDirection *= -1;
+                transform.Rotate(0.0f, 180.0f, 0.0f);
+                transform.position = transform.position + new Vector3(-0.5f, 0);
+            }
         }
     }
 
