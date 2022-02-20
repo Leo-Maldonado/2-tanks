@@ -111,8 +111,6 @@ public class Tank : MonoBehaviour
         // Choose missile
         ChooseMissile();
 
-        // Display last shot position
-        DisplayLastShotPos();
 
         // Shoot
         Shoot();
@@ -274,14 +272,14 @@ public class Tank : MonoBehaviour
     // Display last shot position
     private void DisplayLastShotPos()
     {
-        if (GameObject.FindGameObjectWithTag("Projectile") == null
-            && playerTurn
-            && !gameOverScreen.GameOver
-            && lastShot.z > 0
-            && !lastShotMarker
-            && !testing)
+        lastShotMarker = Instantiate(ShotMarker, lastShot, Quaternion.identity);
+        if (turnManager.IsPlayerTurn(1))
         {
-            lastShotMarker = Instantiate(ShotMarker, lastShot, Quaternion.identity);
+            lastShotMarker.GetComponent<SpriteRenderer>().color = new Color(0f,.4f,.1f,1f);
+        }
+        if (turnManager.IsPlayerTurn(2))
+        {
+            lastShotMarker.GetComponent<SpriteRenderer>().color = new Color(0.5f,0.5f,0.5f,0.75f);
         }
     }
 
@@ -297,10 +295,10 @@ public class Tank : MonoBehaviour
             // Get rid of the aiming arrow and last shot marker
             Destroy(FindObjectOfType<Arrow>().gameObject);
             Destroy(lastShotMarker);
-
             // Update last shot position and make sure z coordinate is 1
             lastShot = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             lastShot.z = 1;
+            DisplayLastShotPos();
 
             // Find mouse position relative to tank position
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
