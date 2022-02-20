@@ -13,7 +13,14 @@ public class TerrainGenerator : MonoBehaviour
     Tilemap tilemap;
 
     // Base tile for the tilemap (should be a rule tile)
-    public TileBase tile;
+    public BetterRuleTile baseTile;
+
+    // Stone tile for lower elevation
+    public BetterRuleTile stoneTile;
+
+    // Gold and diamond tiles
+    public BetterRuleTile goldTile;
+    public BetterRuleTile diamondTile;
 
     // Sets width and height of generated terrain, and interval for Perlin noise function (lower interval means more randomness)
     public int terrainWidth, terrainHeight, perlinInterval;
@@ -86,8 +93,80 @@ public class TerrainGenerator : MonoBehaviour
     {
         float seed = Random.Range(0f, 100f);
         mapArray = GenerateArray(terrainWidth, terrainHeight, true, tank1X, tank2X);
-        RenderMap(PerlinNoiseSmooth(mapArray, seed, perlinInterval), tilemap, tile, tank1X, tank2X);
+        // Map before adding stone, gold, or diamond
+        int[,] map = PerlinNoiseSmooth(mapArray, seed, perlinInterval);
+        // Add stone and stuff
+        map = AddStone(map);
+        RenderMap(map, tilemap, baseTile, stoneTile, goldTile, diamondTile, tank1X, tank2X);
         RenderTank(Tank1Prefab, Tank2Prefab, mapArray, tank1X, tank2X, tilemap);
+    }
+
+    // Add stone and ores to the map
+    // 2 = stone, 3 = gold, 4 = diamond
+    int[,] AddStone(int[,] map)
+    {
+        for (int x = 0; x < map.GetUpperBound(0); x++)
+        {
+            // Stone and ores can be found minimum 5 layers below ground
+            for (int y = FindLandGivenXCoord(x, map) - 5; y >= 0; y--)
+            {
+                if (map[x,y] == 1)
+                {
+                    // Random number to create probabilities
+                    int randomNum = Random.Range(1, 10);
+                    // Bottom 3 layers are always stone
+                    if (y < 4)
+                    {
+                        map[x, y] = StoneOrOre();
+                    }
+                    // No dirt under stone
+                    else if (map[x, y + 1] >= 2)
+                    {
+                        map[x, y] = StoneOrOre();
+                    }
+                    // 40% chance of stone for any eligible block
+                    else if (randomNum > 6)
+                    {
+                        map[x, y] = StoneOrOre();
+                    }
+                }
+            }
+        }
+        return map;
+    }
+
+    // Helper that decides if a given stone block will be stone, gold, or diamond
+    int StoneOrOre()
+    {
+        int randomNum = Random.Range(1, 101);
+        // 1% chance of diamonds
+        if (randomNum == 100)
+        {
+            return 4;
+        }
+        // 2% chance of gold
+        else if (randomNum >= 98)
+        {
+            return 3;
+        }
+        else
+        {
+            return 2;
+        }
+    }
+
+    // Helper that finds the height of the land at a given x coordinate
+    int FindLandGivenXCoord(int x, int[,] map)
+    {
+        for (int y = map.GetUpperBound(1); y >= 0; y--)
+        {
+            if (map[x, y] != 0)
+            {
+                return y;
+            }
+        }
+        // This should never happen but if there is no terrain return 0
+        return 0;
     }
 
     // Instantiate the tank players given the map that was generated
@@ -98,7 +177,7 @@ public class TerrainGenerator : MonoBehaviour
         int tank2Y = map.GetUpperBound(1);
         for (int y = map.GetUpperBound(1); y >= 0; y--)
         {
-            if (map[tank1X, y] == 1)
+            if (map[tank1X, y] != 0)
             {
                 tank1Y = y;
                 break;
@@ -106,7 +185,7 @@ public class TerrainGenerator : MonoBehaviour
         }
         for (int y = map.GetUpperBound(1); y >= 0; y--)
         {
-            if (map[tank2X, y] == 1)
+            if (map[tank2X, y]!= 0)
             {
                 tank2Y = y;
                 break;
@@ -146,7 +225,7 @@ public class TerrainGenerator : MonoBehaviour
     }
 
     // Render tilemap by placing tiles if there is a 1 in a space on the map array
-    public static void RenderMap(int[,] map, Tilemap tilemap, TileBase tile, int tank1X, int tank2X)
+    public static void RenderMap(int[,] map, Tilemap tilemap, BetterRuleTile baseTile, BetterRuleTile stoneTile, BetterRuleTile goldTile, BetterRuleTile diamondTile, int tank1X, int tank2X)
     {
         //Clear the map (ensures we dont overlap)
         tilemap.ClearAllTiles();
@@ -168,10 +247,22 @@ public class TerrainGenerator : MonoBehaviour
             //Loop through the height of the map
             for (int y = 0; y < map.GetUpperBound(1); y++)
             {
-                // 1 = tile, 0 = no tile
-                if (map[x, y] == 1) // && ((next to tank1x or tank2x) && (!higher than tank1y or !higher than tank2y)) )
+                // 0 = no tile, 1 = base tile, 2 = stone tile, 3 = gold tile, 4 = diamond tile
+                if (map[x, y] == 1)
                 {
-                    tilemap.SetTile(new Vector3Int(x, y, 0), tile);
+                    tilemap.SetTile(new Vector3Int(x, y, 0), baseTile);
+                }
+                if (map[x, y] == 2)
+                {
+                    tilemap.SetTile(new Vector3Int(x, y, 0), stoneTile);
+                }
+                if (map[x, y] == 3)
+                {
+                    tilemap.SetTile(new Vector3Int(x, y, 0), goldTile);
+                }
+                if (map[x, y] == 4)
+                {
+                    tilemap.SetTile(new Vector3Int(x, y, 0), diamondTile);
                 }
             }
         }

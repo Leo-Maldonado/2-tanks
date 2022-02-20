@@ -592,7 +592,7 @@ MonoBehaviour:
   missile2Cost: 0
   missile3: {fileID: 8451944392418705572, guid: 051faf7602bea4b63803acb31d10e9f9, type: 3}
   missile3Cost: 0
-  missile4: {fileID: 0}
+  missile4: {fileID: 4653566144593924065, guid: bc6c2b39cb2184bb69d8f80dbf1cbf65, type: 3}
   missile4Cost: 0
 --- !u!4 &656011178
 Transform:

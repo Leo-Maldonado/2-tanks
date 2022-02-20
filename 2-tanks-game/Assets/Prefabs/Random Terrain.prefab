@@ -219,7 +219,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 935826711aba84c828ec62cbb2cabb54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile: {fileID: 11400000, guid: c949029eeb612492f92f614ae4586d22, type: 2}
+  baseTile: {fileID: 11400000, guid: 0ae00c16506634d47a32fb09df3b87d5, type: 2}
+  stoneTile: {fileID: 11400000, guid: 2b579fc335d8c4e4aab63e1f6ea095f9, type: 2}
+  goldTile: {fileID: 11400000, guid: d3156c7a8014d4efab66fdaf7a61e818, type: 2}
+  diamondTile: {fileID: 11400000, guid: aaea7672936fb43e194771ef7cf9b5b9, type: 2}
   terrainWidth: 50
   terrainHeight: 30
   perlinInterval: 4
@@ -228,6 +231,7 @@ MonoBehaviour:
   tank1X: 0
   tank2X: 0
   arrow: {fileID: 0}
+  turnManager: {fileID: 0}
 --- !u!114 &7567192837253878989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,3 +245,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilemap: {fileID: 5918156292631225718}
+  goldTile: {fileID: 11400000, guid: d3156c7a8014d4efab66fdaf7a61e818, type: 2}
+  diamondTile: {fileID: 11400000, guid: aaea7672936fb43e194771ef7cf9b5b9, type: 2}

@@ -1559,6 +1559,14 @@ PrefabInstance:
       value: 64
       objectReference: {fileID: 0}
     - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
+      propertyPath: baseTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 0ae00c16506634d47a32fb09df3b87d5, type: 2}
+    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
+      propertyPath: stoneTile
+      value: 
+      objectReference: {fileID: 11400000, guid: 2b579fc335d8c4e4aab63e1f6ea095f9, type: 2}
+    - target: {fileID: 5918156292631225719, guid: 4b3e6a533f9c042079076ae74a62c5c0, type: 3}
       propertyPath: tank1Width
       value: 5
       objectReference: {fileID: 0}
