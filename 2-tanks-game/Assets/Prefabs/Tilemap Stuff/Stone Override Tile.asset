@@ -34,18 +34,22 @@ MonoBehaviour:
     - {x: 0, y: 1, z: 0}
     - {x: -1, y: 0, z: 0}
     m_RuleTransform: 2
-  - m_Id: 0
+  - m_Id: 1
     m_Sprites:
     - {fileID: 2091829175261615561, guid: 016ffb5210bda4e468e3bab2653ec7a8, type: 3}
+    - {fileID: 7357123456376359846, guid: 016ffb5210bda4e468e3bab2653ec7a8, type: 3}
+    - {fileID: -7343860702648896561, guid: 016ffb5210bda4e468e3bab2653ec7a8, type: 3}
     m_GameObject: {fileID: 0}
     m_MinAnimationSpeed: 1
     m_MaxAnimationSpeed: 1
-    m_PerlinScale: 0.5
+    m_PerlinScale: 0.93
     m_Output: 0
     m_ColliderType: 1
-    m_RandomTransform: 0
+    m_RandomTransform: 4
     m_Neighbors: 
     m_NeighborPositions: []
     m_RuleTransform: 0
   Siblings:
   - {fileID: 11400000, guid: 0ae00c16506634d47a32fb09df3b87d5, type: 2}
+  - {fileID: 11400000, guid: d3156c7a8014d4efab66fdaf7a61e818, type: 2}
+  - {fileID: 11400000, guid: aaea7672936fb43e194771ef7cf9b5b9, type: 2}
