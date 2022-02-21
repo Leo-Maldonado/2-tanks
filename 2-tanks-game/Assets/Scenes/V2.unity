@@ -300,6 +300,8 @@ MonoBehaviour:
   missile3Cost: 50
   missile4: {fileID: 4653566144593924065, guid: bc6c2b39cb2184bb69d8f80dbf1cbf65, type: 3}
   missile4Cost: 250
+  missile5: {fileID: 9211269853705240317, guid: cf9dc58a8947b493098e11567c9987a4, type: 3}
+  missile5Cost: 250
 --- !u!4 &595987055
 Transform:
   m_ObjectHideFlags: 0

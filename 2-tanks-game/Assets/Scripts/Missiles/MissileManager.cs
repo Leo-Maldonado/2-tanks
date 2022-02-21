@@ -21,6 +21,10 @@ public class MissileManager : MonoBehaviour
 
     public float missile4Cost;
 
+    public GameObject missile5;
+
+    public float missile5Cost;
+
     // Dictionary with missiles and costs
     public Dictionary<GameObject, float> missiles = new Dictionary<GameObject, float>();
 
@@ -31,6 +35,7 @@ public class MissileManager : MonoBehaviour
         missiles.Add(missile2, missile2Cost);
         missiles.Add(missile3, missile3Cost);
         missiles.Add(missile4, missile4Cost);
+        missiles.Add(missile5, missile5Cost);
     }
 
     // Request a missile - returns true if purchased

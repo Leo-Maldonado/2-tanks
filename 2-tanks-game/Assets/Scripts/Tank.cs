@@ -266,6 +266,10 @@ public class Tank : MonoBehaviour
             {
                 AttemptPurchaseMissile(missileManager.missile4);
             }
+            if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                AttemptPurchaseMissile(missileManager.missile5);
+            }
         }
     }
 
