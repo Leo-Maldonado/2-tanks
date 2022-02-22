@@ -586,14 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae8584201fd046d49a928b3804fda3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missile1: {fileID: 3889304514323219666, guid: d682da2719d65426481d952b134e259a, type: 3}
-  missile1Cost: 0
-  missile2: {fileID: 5725846938665835003, guid: b0ef723295fc24b13ac920e0872d1715, type: 3}
-  missile2Cost: 0
-  missile3: {fileID: 8451944392418705572, guid: 051faf7602bea4b63803acb31d10e9f9, type: 3}
-  missile3Cost: 0
-  missile4: {fileID: 4653566144593924065, guid: bc6c2b39cb2184bb69d8f80dbf1cbf65, type: 3}
-  missile4Cost: 0
+  missileArray: []
 --- !u!4 &656011178
 Transform:
   m_ObjectHideFlags: 0
@@ -962,7 +955,7 @@ MonoBehaviour:
   M2: {fileID: 8451944392418705572, guid: 051faf7602bea4b63803acb31d10e9f9, type: 3}
   M3: {fileID: 5725846938665835003, guid: b0ef723295fc24b13ac920e0872d1715, type: 3}
   M4: {fileID: 4653566144593924065, guid: bc6c2b39cb2184bb69d8f80dbf1cbf65, type: 3}
-  M5: {fileID: 9211269853705240317, guid: cf9dc58a8947b493098e11567c9987a4, type: 3}
+  M5: {fileID: 8507056140642299404, guid: 1d52e81463cac4ccb8baed931cd1620d, type: 3}
 --- !u!4 &1230595525
 Transform:
   m_ObjectHideFlags: 0

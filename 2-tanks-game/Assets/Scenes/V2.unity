@@ -983,6 +983,9 @@ MonoBehaviour:
   - name: Sniper Missile
     missile: {fileID: 8451944392418705572, guid: 051faf7602bea4b63803acb31d10e9f9, type: 3}
     cost: 50
+  - name: Mountain Maker
+    missile: {fileID: 8507056140642299404, guid: 1d52e81463cac4ccb8baed931cd1620d, type: 3}
+    cost: 150
   - name: Summon Death
     missile: {fileID: 4653566144593924065, guid: bc6c2b39cb2184bb69d8f80dbf1cbf65, type: 3}
     cost: 500
