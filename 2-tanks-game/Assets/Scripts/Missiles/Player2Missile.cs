@@ -16,7 +16,7 @@ public class Player2Missile : MonoBehaviour
     void Start()
     {
         tank2 = GameObject.Find("Tank2");
-        Vector3 spawnPos = new Vector3(34.5f, 20.5f, 0f);
+        Vector3 spawnPos = new Vector3(30.6f, 23.125f, 0f);
         UI1 = Instantiate(ChoiceUI, spawnPos, Quaternion.identity);
         displayedMissile = tank2.GetComponent<Tank>().currentMissile;
         UI1.GetComponent<MissileChoiceUI>().Player2Change(displayedMissile);

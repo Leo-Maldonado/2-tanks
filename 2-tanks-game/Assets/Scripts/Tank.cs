@@ -53,7 +53,7 @@ public class Tank : MonoBehaviour
     private bool isOnSlope;
 
     // Direction we are facing
-    private float facingDirection = 1;
+    public float facingDirection = 1;
 
     // The x input
     private float xInput;
@@ -71,6 +71,9 @@ public class Tank : MonoBehaviour
 
     // If player has earned turn points this turn
     private bool hasEarnedPoints = false;
+
+    // The buy menu
+    private GameObject buyMenu;
 
 
     // Apply the specified damage to the tank's health
@@ -97,6 +100,8 @@ public class Tank : MonoBehaviour
         gameOverScreen = FindObjectOfType<GameOverScreen>();
         rigidBody = GetComponent<Rigidbody2D>();
         missileManager = FindObjectOfType<MissileManager>();
+        // Buy menu
+        buyMenu = GameObject.Find("Container");
     }
 
     // Update is called once per frame
@@ -108,9 +113,8 @@ public class Tank : MonoBehaviour
         // Correct turn points
         ManageTurnPoints();
 
-        // Choose missile
-        ChooseMissile();
-
+        // Choose missile with number keys - deprecated with buy menu
+        // ChooseMissile();
 
         // Shoot
         Shoot();
@@ -214,17 +218,25 @@ public class Tank : MonoBehaviour
         }
     }
 
-    // Internal purchase missile
-    private void AttemptPurchaseMissile(GameObject missile)
+    // Purchase missile
+    public void AttemptPurchaseMissile(string missile)
     {
-        bool purchased = missileManager.MissileRequest(turnPoints, missile);
-        if (purchased)
+        bool purchased = missileManager.MissileRequest(turnPoints + missileManager.missiles[currentMissile], missile);
+        if (purchased && missileManager.missileObjects[missile] != currentMissile)
         {
-            currentMissile = missile;
-        }
-        else
-        {
-            Debug.Log("You are broke");
+            // Charge them + refund some
+            if (currentMissile == missileManager.missile1)
+            {
+                turnPoints -= missileManager.missiles[missileManager.missileObjects[missile]];
+            }
+            else
+            {
+                turnPoints += missileManager.missiles[currentMissile];
+                turnPoints -= missileManager.missiles[missileManager.missileObjects[missile]];
+            }
+
+            // Give player missile if can afford and not same
+            currentMissile = missileManager.missileObjects[missile];
         }
     }
 
@@ -252,23 +264,23 @@ public class Tank : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                AttemptPurchaseMissile(missileManager.missile1);
+                AttemptPurchaseMissile("Missile 1");
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                AttemptPurchaseMissile(missileManager.missile2);
+                AttemptPurchaseMissile("Missile 2");
             }
             if (Input.GetKeyDown(KeyCode.Alpha3))
             {
-                AttemptPurchaseMissile(missileManager.missile3);
+                AttemptPurchaseMissile("Missile 3");
             }
             if (Input.GetKeyDown(KeyCode.Alpha4))
             {
-                AttemptPurchaseMissile(missileManager.missile4);
+                AttemptPurchaseMissile("Missile 4");
             }
             if (Input.GetKeyDown(KeyCode.Alpha5))
             {
-                AttemptPurchaseMissile(missileManager.missile5);
+                AttemptPurchaseMissile("Missile 5");
             }
         }
     }
@@ -290,15 +302,20 @@ public class Tank : MonoBehaviour
     // Shoot your gun
     private void Shoot()
     {
+        // You can only shoot if buy menu isn't up
+        buyMenu = GameObject.Find("Container");
+
         if (Input.GetKeyDown(KeyCode.Mouse0)
             && GameObject.FindGameObjectWithTag("Projectile") == null
             && playerTurn
             && !gameOverScreen.GameOver
-            && !testing)
+            && !testing
+            && !buyMenu)
         {
             // Get rid of the aiming arrow and last shot marker
             Destroy(FindObjectOfType<Arrow>().gameObject);
             Destroy(lastShotMarker);
+
             // Update last shot position and make sure z coordinate is 1
             lastShot = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             lastShot.z = 1;
@@ -325,9 +342,6 @@ public class Tank : MonoBehaviour
             Vector3 normalized = new Vector3(xRel, yRel, 0).normalized;
             Vector3 missilePos = transform.position + normalized * 2.5f;
             GameObject missile = Instantiate(currentMissile, missilePos, q);
-
-            // Charge player for purchasing missile
-            turnPoints -= missileManager.missiles[currentMissile];
 
             // Vector to scale velocity
             Vector3 addVelo = new Vector3(xRel, yRel, 0.0f);

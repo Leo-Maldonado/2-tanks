@@ -25,8 +25,11 @@ public class MissileManager : MonoBehaviour
 
     public float missile5Cost;
 
-    // Dictionary with missiles and costs
+    // Dictionary that maps missile object --> missile cost
     public Dictionary<GameObject, float> missiles = new Dictionary<GameObject, float>();
+
+    // Dictionary that maps missile name --> missile object
+    public Dictionary<string, GameObject> missileObjects = new Dictionary<string, GameObject>();
 
     // Start
     private void Start()
@@ -36,13 +39,19 @@ public class MissileManager : MonoBehaviour
         missiles.Add(missile3, missile3Cost);
         missiles.Add(missile4, missile4Cost);
         missiles.Add(missile5, missile5Cost);
+
+        missileObjects.Add("Missile 1", missile1);
+        missileObjects.Add("Missile 2", missile2);
+        missileObjects.Add("Missile 3", missile3);
+        missileObjects.Add("Missile 4", missile4);
+        missileObjects.Add("Missile 5", missile5);
     }
 
     // Request a missile - returns true if purchased
-    public bool MissileRequest(float points, GameObject missile)
+    public bool MissileRequest(float points, string missile)
     {
         // If we can afford the missile
-        if (missiles[missile] <= points)
+        if (missiles[missileObjects[missile]] <= points)
         {
             return true;
         }

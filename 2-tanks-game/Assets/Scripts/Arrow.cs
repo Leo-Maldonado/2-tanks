@@ -57,18 +57,41 @@ public class Arrow : MonoBehaviour
         // Aim to face mouse
         Vector3 screenPos = Camera.main.WorldToScreenPoint(transform.position);
         float angle = Mathf.Atan2(Input.mousePosition.y - screenPos.y, Input.mousePosition.x - screenPos.x) * Mathf.Rad2Deg;
+
         //Restrict to forward and up
+        Tank tank1 = GameObject.Find("Tank1").GetComponent<Tank>();
+        Tank tank2 = GameObject.Find("Tank2").GetComponent<Tank>();
+    
+        // Facing forward
         if (turnManager.IsPlayerTurn(1))
         {
-            angle = Mathf.Clamp(angle, 0, 90);
+            if (tank1.facingDirection == 1)
+            {
+                angle = Mathf.Clamp(angle, 0, 90);
+            }
+            else
+            {
+                if (angle <= 0)
+                {
+                    angle = 180;
+                }
+                angle = Mathf.Clamp(angle, 90, 180);
+            }
         }
         else
         {
-            if (angle <= 0)
+            if (tank2.facingDirection == 1)
             {
-                angle = 180;
+                if (angle <= 0)
+                {
+                    angle = 180;
+                }
+                angle = Mathf.Clamp(angle, 90, 180);
             }
-            angle = Mathf.Clamp(angle, 90, 180);
+            else
+            {
+                angle = Mathf.Clamp(angle, 0, 90);
+            }
         }
         rigidBody.MoveRotation(angle - 90);
     }

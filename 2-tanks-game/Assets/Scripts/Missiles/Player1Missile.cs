@@ -17,8 +17,9 @@ public class Player1Missile : MonoBehaviour
     void Start()
     {
         tank1 = GameObject.Find("Tank1");
-        Vector3 spawnPos = new Vector3(-6f, 20.5f, 0f);
-        UI1 = Instantiate(ChoiceUI, spawnPos, Quaternion.identity);
+        Vector3 spawnPos = new Vector3(-10.3f, 23.125f, 0f);
+        Quaternion spawnRot = new Quaternion(0, 180, 0, 0);
+        UI1 = Instantiate(ChoiceUI, spawnPos, spawnRot);
         displayedMissile = tank1.GetComponent<Tank>().currentMissile;
         UI1.GetComponent<MissileChoiceUI>().Player1Change(displayedMissile);
     }

@@ -6,10 +6,13 @@ public class MissileChoiceUI : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer;
 
+    private MissileManager missileManager;
+
     // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        missileManager = FindObjectOfType<MissileManager>();
     }
 
     public void Player1Change(GameObject missile)

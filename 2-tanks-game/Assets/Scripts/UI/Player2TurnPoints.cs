@@ -26,6 +26,6 @@ public class Player2TurnPoints : MonoBehaviour
     {
         tank2 = GameObject.Find("Tank2");
         tank2TurnPoints = tank2.GetComponent<Tank>().turnPoints;
-        TextComponent.text = "Player 2 Turn Points: " + tank2TurnPoints;
+        TextComponent.text = tank2TurnPoints.ToString();
     }
 }
