@@ -117,9 +117,9 @@ public class BuyMenu : MonoBehaviour
         shopItemTransform.Find("NameText").GetComponent<TextMeshProUGUI>().SetText(itemName);
         shopItemTransform.Find("PriceText").GetComponent<TextMeshProUGUI>().SetText(itemCost.ToString());
         shopItemTransform.Find("ItemImage").GetComponent<Image>().sprite = itemSprite;
-        //shopItemTransform.Find("ItemImage").GetComponent<RectTransform>().localScale = missileManager.missileObjects[itemName].transform.localScale;
         shopItemTransform.gameObject.SetActive(true);
 
+        // Add on click functionality
         shopItemTransform.GetComponent<Button>().onClick.AddListener(ClickEvent);
     }
 
