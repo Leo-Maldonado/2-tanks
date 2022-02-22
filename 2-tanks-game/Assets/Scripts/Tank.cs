@@ -326,14 +326,22 @@ public class Tank : MonoBehaviour
 
             // Calculate rotation to spawn with
             float yRel = Mathf.Clamp(relativeMousePos.y, 0.025f, 16f); // Can't shoot down
-            float xRel;
-            if (turnManager.IsPlayerTurn(1))
+            float xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 16f);
+            if (facingDirection == 1 && turnManager.IsPlayerTurn(1))
             {
                 xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 16f);
             }
-            else
+            else if(turnManager.IsPlayerTurn(1))
             {
                 xRel = Mathf.Clamp(relativeMousePos.x, -16f, -0.025f);
+            }
+            if (facingDirection == 1 && turnManager.IsPlayerTurn(2))
+            {
+                xRel = Mathf.Clamp(relativeMousePos.x, -16f, -0.025f);
+            }
+            else if (turnManager.IsPlayerTurn(2))
+            {
+                xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 16f);
             }
             var angle = Mathf.Atan2(yRel, xRel) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
