@@ -36,33 +36,18 @@ public class BuyMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // Build menu
-        CreateItemButton(
-            missileManager.missile1.GetComponent<SpriteRenderer>().sprite,
-            "Missile 1",
-            (int)missileManager.missile1Cost,
-            0);
-        CreateItemButton(
-            missileManager.missile2.GetComponent<SpriteRenderer>().sprite,
-            "Missile 2",
-            (int)missileManager.missile2Cost,
-            1);
-        CreateItemButton(
-            missileManager.missile3.GetComponent<SpriteRenderer>().sprite,
-            "Missile 3",
-            (int)missileManager.missile3Cost,
-            2);
-        CreateItemButton(
-            missileManager.missile4.GetComponent<SpriteRenderer>().sprite,
-            "Missile 4",
-            (int)missileManager.missile4Cost,
-            3);
-        CreateItemButton(
-            missileManager.missile5.GetComponent<SpriteRenderer>().sprite,
-            "Missile 5",
-            (int)missileManager.missile5Cost,
-            4);
-
+        // Index for looping
+        int index = 0;
+        // Loop thru missiles and build buy menu
+        foreach(MissileManager.missileInfo missileInfo in missileManager.missileArray)
+        {
+            CreateItemButton(
+                missileInfo.missile.GetComponent<SpriteRenderer>().sprite,
+                missileInfo.name,
+                (int)missileInfo.cost,
+                index);
+            index++;
+        }
         // Remove buy menu to start
         Container.gameObject.SetActive(false);
     }

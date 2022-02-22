@@ -225,15 +225,8 @@ public class Tank : MonoBehaviour
         if (purchased && missileManager.missileObjects[missile] != currentMissile)
         {
             // Charge them + refund some
-            if (currentMissile == missileManager.missile1)
-            {
-                turnPoints -= missileManager.missiles[missileManager.missileObjects[missile]];
-            }
-            else
-            {
-                turnPoints += missileManager.missiles[currentMissile];
-                turnPoints -= missileManager.missiles[missileManager.missileObjects[missile]];
-            }
+            turnPoints += missileManager.missiles[currentMissile];
+            turnPoints -= missileManager.missiles[missileManager.missileObjects[missile]];
 
             // Give player missile if can afford and not same
             currentMissile = missileManager.missileObjects[missile];
@@ -253,7 +246,7 @@ public class Tank : MonoBehaviour
         if (!playerTurn)
         {
             hasEarnedPoints = false;
-            currentMissile = missileManager.missile1;
+            currentMissile = missileManager.missileObjects["Basic Missile"];
         }
     }
 

@@ -4,47 +4,35 @@ using UnityEngine;
 
 public class MissileManager : MonoBehaviour
 {
-    // Right now this is just going to hold different missile types for the tanks to access them
-    public GameObject missile1;
-
-    public float missile1Cost;
-
-    public GameObject missile2;
-
-    public float missile2Cost;
-
-    public GameObject missile3;
-
-    public float missile3Cost;
-
-    public GameObject missile4;
-
-    public float missile4Cost;
-
-    public GameObject missile5;
-
-    public float missile5Cost;
-
     // Dictionary that maps missile object --> missile cost
     public Dictionary<GameObject, float> missiles = new Dictionary<GameObject, float>();
 
     // Dictionary that maps missile name --> missile object
     public Dictionary<string, GameObject> missileObjects = new Dictionary<string, GameObject>();
 
+    // Struct to hold missile name, game object, and cost
+    // -> enables there to be one single place to add new missiles into the UI/game
+    [System.Serializable]
+    public struct missileInfo
+    {
+        public string name;
+        public GameObject missile;
+        public float cost;
+    }
+
+    // Array to fill with missiles in the inspector
+    // This is the only place a new missile needs to be added!
+    public missileInfo[] missileArray;
+
     // Start
     private void Start()
     {
-        missiles.Add(missile1, missile1Cost);
-        missiles.Add(missile2, missile2Cost);
-        missiles.Add(missile3, missile3Cost);
-        missiles.Add(missile4, missile4Cost);
-        missiles.Add(missile5, missile5Cost);
-
-        missileObjects.Add("Missile 1", missile1);
-        missileObjects.Add("Missile 2", missile2);
-        missileObjects.Add("Missile 3", missile3);
-        missileObjects.Add("Missile 4", missile4);
-        missileObjects.Add("Missile 5", missile5);
+        // Loop through and add all missiles to the relevant dictionaries
+        foreach (missileInfo missileInfo in missileArray)
+        {
+            missiles.Add(missileInfo.missile, missileInfo.cost);
+            missileObjects.Add(missileInfo.name, missileInfo.missile);
+        }
     }
 
     // Request a missile - returns true if purchased
