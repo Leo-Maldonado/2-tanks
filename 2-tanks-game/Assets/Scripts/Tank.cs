@@ -133,6 +133,8 @@ public class Tank : MonoBehaviour
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
 
+
+
     }
 
     // FixedUpdate for movement
@@ -318,23 +320,23 @@ public class Tank : MonoBehaviour
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
             // Calculate rotation to spawn with
-            float yRel = Mathf.Clamp(relativeMousePos.y, 0.025f, 16f); // Can't shoot down
-            float xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 16f);
+            float yRel = Mathf.Clamp(relativeMousePos.y, 0.025f, 12.5f); // Can't shoot down
+            float xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
             if (facingDirection == 1 && turnManager.IsPlayerTurn(1))
             {
-                xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 16f);
+                xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
             }
             else if(turnManager.IsPlayerTurn(1))
             {
-                xRel = Mathf.Clamp(relativeMousePos.x, -16f, -0.025f);
+                xRel = Mathf.Clamp(relativeMousePos.x, -12.5f, -0.025f);
             }
             if (facingDirection == 1 && turnManager.IsPlayerTurn(2))
             {
-                xRel = Mathf.Clamp(relativeMousePos.x, -16f, -0.025f);
+                xRel = Mathf.Clamp(relativeMousePos.x, -12.5f, -0.025f);
             }
             else if (turnManager.IsPlayerTurn(2))
             {
-                xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 16f);
+                xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
             }
             var angle = Mathf.Atan2(yRel, xRel) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -345,6 +347,7 @@ public class Tank : MonoBehaviour
             GameObject missile = Instantiate(currentMissile, missilePos, q);
 
             // Vector to scale velocity
+            Debug.Log(xRel + " " + yRel);
             Vector3 addVelo = new Vector3(xRel, yRel, 0.0f);
 
             // Add velocity to the missile
