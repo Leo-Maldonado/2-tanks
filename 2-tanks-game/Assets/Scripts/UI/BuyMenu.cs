@@ -24,6 +24,10 @@ public class BuyMenu : MonoBehaviour
     // The turn manager
     private TurnManager turnManager;
 
+    private Transform basicMissileTransform;
+
+    private string currentMissileToBuy = "Basic Missile";
+
     private void Awake()
     {
         Container = transform.Find("Container");
@@ -38,8 +42,10 @@ public class BuyMenu : MonoBehaviour
     {
         // Index for looping
         int index = 0;
+        
+    
         // Loop thru missiles and build buy menu
-        foreach(MissileManager.missileInfo missileInfo in missileManager.missileArray)
+        foreach (MissileManager.missileInfo missileInfo in missileManager.missileArray)
         {
             CreateItemButton(
                 missileInfo.missile.GetComponent<SpriteRenderer>().sprite,
@@ -47,9 +53,25 @@ public class BuyMenu : MonoBehaviour
                 (int)missileInfo.cost,
                 index);
             index++;
+          
         }
+        Tank1 = GameObject.Find("Tank1").GetComponent<Tank>();
+        Tank2 = GameObject.Find("Tank2").GetComponent<Tank>();
         // Remove buy menu to start
+        Button[] buttons = FindObjectsOfType<Button>();
         Container.gameObject.SetActive(false);
+        foreach (Button b in buttons)
+        {
+
+            if (b.name == "BuyButton")
+            {
+                b.onClick.AddListener(ClickEvent);
+            }
+            
+        }
+
+
+     
     }
 
     // Update is called once per frame
@@ -76,28 +98,34 @@ public class BuyMenu : MonoBehaviour
         Button[] buttons = FindObjectsOfType<Button>();
         foreach (Button b in buttons)
         {
-            if (turnManager.IsPlayerTurn(1))
+            if(b.name != "BuyButton")
             {
-                if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank1.turnPoints + missileManager.missiles[Tank1.currentMissile])
+                if (turnManager.IsPlayerTurn(1))
                 {
-                    b.interactable = false;
+                    if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank1.turnPoints + missileManager.missiles[Tank1.currentMissile])
+                    {
+                        b.interactable = false;
+                    }
+                    else
+                    {
+                        b.interactable = true;
+                    }
                 }
                 else
                 {
-                    b.interactable = true;
+                    if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank2.turnPoints + missileManager.missiles[Tank2.currentMissile])
+                    {
+                        b.interactable = false;
+                    }
+                    else
+                    {
+                        b.interactable = true;
+                    }
                 }
             }
-            else
-            {
-                if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank2.turnPoints + missileManager.missiles[Tank2.currentMissile])
-                {
-                    b.interactable = false;
-                }
-                else
-                {
-                    b.interactable = true;
-                }
-            }
+            
+            
+
         }
     }
 
@@ -111,7 +139,7 @@ public class BuyMenu : MonoBehaviour
 
         // Specify position for item
         float shopItemHeight = 10f;
-        shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex + 25);
+        shopItemRectTransform.anchoredPosition = new Vector2(0, -shopItemHeight * positionIndex + 35);
 
         // Set fields of item to display properly
         shopItemTransform.Find("NameText").GetComponent<TextMeshProUGUI>().SetText(itemName);
@@ -121,20 +149,34 @@ public class BuyMenu : MonoBehaviour
 
         // Add on click functionality
         shopItemTransform.GetComponent<Button>().onClick.AddListener(ClickEvent);
+
+       
+
     }
+    
 
     // ClickEvent to be called when item in buy menu is clicked on
     private void ClickEvent()
     {
         // Get name of button clicked on, and attempt to purchase it for the correct tank
         string selectedButton = EventSystem.current.currentSelectedGameObject.name;
-        if (turnManager.IsPlayerTurn(1) && GameObject.FindGameObjectWithTag("Projectile") == null)
+        if(selectedButton == "BuyButton")
         {
-            Tank1.AttemptPurchaseMissile(selectedButton);
+            if (turnManager.IsPlayerTurn(1) && GameObject.FindGameObjectWithTag("Projectile") == null)
+            {
+                Tank1.AttemptPurchaseMissile(currentMissileToBuy);
+                Container.gameObject.SetActive(false);
+            }
+            else
+            {
+                Tank2.AttemptPurchaseMissile(currentMissileToBuy);
+                Container.gameObject.SetActive(false);
+            }
         }
         else
         {
-            Tank2.AttemptPurchaseMissile(selectedButton);
+            currentMissileToBuy = selectedButton;
         }
+       
     }
 }

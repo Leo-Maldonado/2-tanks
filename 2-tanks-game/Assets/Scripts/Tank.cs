@@ -347,7 +347,6 @@ public class Tank : MonoBehaviour
             GameObject missile = Instantiate(currentMissile, missilePos, q);
 
             // Vector to scale velocity
-            Debug.Log(xRel + " " + yRel);
             Vector3 addVelo = new Vector3(xRel, yRel, 0.0f);
 
             // Add velocity to the missile
