@@ -81,7 +81,7 @@ public class BuyMenu : MonoBehaviour
         Tank2 = GameObject.Find("Tank2").GetComponent<Tank>();
 
         // Close and bring up when B is pressed
-        if (Input.GetKeyDown(KeyCode.B)
+        if ((Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.Escape))
             && Container.gameObject.activeSelf
             && GameObject.FindGameObjectWithTag("Projectile") == null)
         {

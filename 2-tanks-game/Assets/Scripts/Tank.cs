@@ -125,10 +125,7 @@ public class Tank : MonoBehaviour
             sprender = gameObject.GetComponent<SpriteRenderer>();
             sprender.enabled = false;
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-        }
+        
 
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
