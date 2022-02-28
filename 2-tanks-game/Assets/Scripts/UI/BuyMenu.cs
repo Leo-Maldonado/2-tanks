@@ -70,8 +70,7 @@ public class BuyMenu : MonoBehaviour
             index++;
           
         }
-        Tank1 = GameObject.Find("Tank1").GetComponent<Tank>();
-        Tank2 = GameObject.Find("Tank2").GetComponent<Tank>();
+
         // Remove buy menu to start
         Button[] buttons = FindObjectsOfType<Button>();
         Container.gameObject.SetActive(false);
@@ -170,6 +169,8 @@ public class BuyMenu : MonoBehaviour
     // ClickEvent to be called when item in buy menu is clicked on
     private void ClickEvent()
     {
+        Tank1 = GameObject.Find("Tank1").GetComponent<Tank>();
+        Tank2 = GameObject.Find("Tank2").GetComponent<Tank>();
         // Get name of button clicked on, and attempt to purchase it for the correct tank
         string selectedButton = EventSystem.current.currentSelectedGameObject.name;
         if(selectedButton == "BuyButton")
