@@ -24,8 +24,6 @@ public class BuyMenu : MonoBehaviour
     // The turn manager
     private TurnManager turnManager;
 
-    private Transform basicMissileTransform;
-
     private string currentMissileToBuy = "Basic Missile";
 
     public GameObject ToolTipPanel;
@@ -60,7 +58,6 @@ public class BuyMenu : MonoBehaviour
         // Index for looping
         int index = 0;
         
-    
         // Loop thru missiles and build buy menu
         foreach (MissileManager.missileInfo missileInfo in missileManager.missileArray)
         {
@@ -82,8 +79,6 @@ public class BuyMenu : MonoBehaviour
              b.onClick.AddListener(ClickEvent);    
         }
 
-
-     
     }
 
     // Update is called once per frame
@@ -115,7 +110,7 @@ public class BuyMenu : MonoBehaviour
             {
                 if (turnManager.IsPlayerTurn(1))
                 {
-                    if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank1.turnPoints + missileManager.missiles[Tank1.currentMissile])
+                    if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank1.turnPoints)
                     {
                         b.interactable = false;
                     }
@@ -126,7 +121,7 @@ public class BuyMenu : MonoBehaviour
                 }
                 else
                 {
-                    if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank2.turnPoints + missileManager.missiles[Tank2.currentMissile])
+                    if (missileManager.missiles[missileManager.missileObjects[b.name]] > Tank2.turnPoints)
                     {
                         b.interactable = false;
                     }
@@ -136,9 +131,21 @@ public class BuyMenu : MonoBehaviour
                     }
                 }
             }
-            
-            
 
+        }
+
+        // If the player deselected, reset buy
+        if (EventSystem.current.currentSelectedGameObject == null)
+        {
+            if (turnManager.IsPlayerTurn(1))
+            {
+                currentMissileToBuy = Tank1.currentMissileName;
+            }
+            else
+            {
+                currentMissileToBuy = Tank2.currentMissileName;
+            }
+            ToolTipPanel.SetActive(false);
         }
     }
 
@@ -162,9 +169,7 @@ public class BuyMenu : MonoBehaviour
 
         // Add on click functionality
         shopItemTransform.GetComponent<Button>().onClick.AddListener(ClickEvent);
-
-       
-
+        
     }
     
 
@@ -193,10 +198,17 @@ public class BuyMenu : MonoBehaviour
         else
         {
             currentMissileToBuy = selectedButton;
+            if (turnManager.IsPlayerTurn(2)) // Tooltip appears on players relative sides
+            {
+                ToolTipPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(650, -165);
+            }
+            else
+            {
+                ToolTipPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-650, -165);
+            }
             ToolTipPanel.SetActive(true);
             TextMeshProUGUI textMesh2 = ToolTipText.GetComponent<TextMeshProUGUI>();
             textMesh2.text = currentMissileToBuy.ToUpper()  + ":\n" + MissileTips[selectedButton];
-
         }
        
     }

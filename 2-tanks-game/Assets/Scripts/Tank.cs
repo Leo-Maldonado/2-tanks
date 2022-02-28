@@ -13,6 +13,9 @@ public class Tank : MonoBehaviour
     // Current missile
     public GameObject currentMissile;
 
+    // Current missile name
+    public string currentMissileName;
+
     // Missile manager
     private MissileManager missileManager;
 
@@ -102,6 +105,9 @@ public class Tank : MonoBehaviour
         missileManager = FindObjectOfType<MissileManager>();
         // Buy menu
         buyMenu = GameObject.Find("Container");
+        // Set current missile
+        currentMissile = missileManager.missileObjects["Basic Missile"];
+        currentMissileName = "Basic Missile";
     }
 
     // Update is called once per frame
@@ -126,11 +132,8 @@ public class Tank : MonoBehaviour
             sprender.enabled = false;
         }
         
-
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
-
-
 
     }
 
@@ -220,15 +223,15 @@ public class Tank : MonoBehaviour
     // Purchase missile
     public void AttemptPurchaseMissile(string missile)
     {
-        bool purchased = missileManager.MissileRequest(turnPoints + missileManager.missiles[currentMissile], missile);
+        bool purchased = missileManager.MissileRequest(turnPoints, missile);
         if (purchased && missileManager.missileObjects[missile] != currentMissile)
         {
             // Charge them + refund some
-            turnPoints += missileManager.missiles[currentMissile];
             turnPoints -= missileManager.missiles[missileManager.missileObjects[missile]];
 
             // Give player missile if can afford and not same
             currentMissile = missileManager.missileObjects[missile];
+            currentMissileName = missile;
         }
     }
 
@@ -246,6 +249,7 @@ public class Tank : MonoBehaviour
         {
             hasEarnedPoints = false;
             currentMissile = missileManager.missileObjects["Basic Missile"];
+            currentMissileName = "Basic Missile";
         }
     }
 
