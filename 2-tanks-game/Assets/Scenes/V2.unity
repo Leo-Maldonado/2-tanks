@@ -154,7 +154,7 @@ RectTransform:
   - {fileID: 1622668582}
   - {fileID: 1887211243}
   m_Father: {fileID: 888640997}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -533,7 +533,7 @@ RectTransform:
   - {fileID: 1549177237}
   - {fileID: 1469650491}
   m_Father: {fileID: 888640997}
-  m_RootOrder: 1
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1138,6 +1138,9 @@ MonoBehaviour:
   - name: Sniper Missile
     missile: {fileID: 8451944392418705572, guid: 051faf7602bea4b63803acb31d10e9f9, type: 3}
     cost: 50
+  - name: Portal Gun
+    missile: {fileID: 7848091379752627011, guid: 611973c1bccc84dc8ba64a145b797c55, type: 3}
+    cost: 50
   - name: Blue Angry Bird
     missile: {fileID: 7194570854676003303, guid: 58cd3a364c4e7409aba0c4636ba28b17, type: 3}
     cost: 150
@@ -1396,7 +1399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8681902549344963901, guid: f9617d03e8d32498ab22e84527b80e4d, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8681902549344963901, guid: f9617d03e8d32498ab22e84527b80e4d, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1577,11 +1580,11 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1107981752}
-  - {fileID: 354328203}
   - {fileID: 1502734438}
   - {fileID: 51676785}
   - {fileID: 2123456059}
   - {fileID: 848755495}
+  - {fileID: 354328203}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2392,7 +2395,7 @@ RectTransform:
   - {fileID: 1862437116}
   - {fileID: 1968007982}
   m_Father: {fileID: 888640997}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3497,7 +3500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8681902549344963901, guid: f9617d03e8d32498ab22e84527b80e4d, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8681902549344963901, guid: f9617d03e8d32498ab22e84527b80e4d, type: 3}
       propertyPath: m_AnchorMax.x

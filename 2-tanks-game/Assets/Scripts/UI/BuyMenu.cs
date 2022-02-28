@@ -40,7 +40,8 @@ public class BuyMenu : MonoBehaviour
         {"Whale","When whale is in air, click to birth fishies" },
         {"Summon Death", "Seems pretty self explanatory" },
         {"Mountain Maker", "Spawns a mountain where it lands" },
-        {"Blue Angry Bird", "Click to split into 3 birds- just like the mobile game" }
+        {"Blue Angry Bird", "Click to split into 3 birds- just like the mobile game" },
+        {"Portal Gun", "Portals your tank to wherever this projectile lands" }
     };
 
 
@@ -194,7 +195,7 @@ public class BuyMenu : MonoBehaviour
             currentMissileToBuy = selectedButton;
             ToolTipPanel.SetActive(true);
             TextMeshProUGUI textMesh2 = ToolTipText.GetComponent<TextMeshProUGUI>();
-            textMesh2.text = "MISSILE INFO:\n" + currentMissileToBuy.ToUpper()  + "\n" + MissileTips[selectedButton];
+            textMesh2.text = currentMissileToBuy.ToUpper()  + ":\n" + MissileTips[selectedButton];
 
         }
        
