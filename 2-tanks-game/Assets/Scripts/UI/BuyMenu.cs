@@ -28,6 +28,21 @@ public class BuyMenu : MonoBehaviour
 
     private string currentMissileToBuy = "Basic Missile";
 
+    public GameObject ToolTipPanel;
+
+    public GameObject ToolTipText;
+
+    private Dictionary<string, string> MissileTips = new Dictionary<string, string>()
+    {
+        {"Basic Missile","Average damage and average terrain destruction" },
+        {"Miner Missile","Low damage but big terrain destruction " },
+        {"Sniper Missile","High damage but you have to hit your shots" },
+        {"Whale","When whale is in air, click to birth fishies" },
+        {"Summon Death", "Seems pretty self explanatory" },
+        {"Mountain Maker", "Spawns a mountain where it lands" }
+    };
+
+
     private void Awake()
     {
         Container = transform.Find("Container");
@@ -60,14 +75,10 @@ public class BuyMenu : MonoBehaviour
         // Remove buy menu to start
         Button[] buttons = FindObjectsOfType<Button>();
         Container.gameObject.SetActive(false);
+        ToolTipPanel.SetActive(false);
         foreach (Button b in buttons)
         {
-
-            if (b.name == "BuyButton")
-            {
-                b.onClick.AddListener(ClickEvent);
-            }
-            
+             b.onClick.AddListener(ClickEvent);    
         }
 
 
@@ -86,6 +97,7 @@ public class BuyMenu : MonoBehaviour
             && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             Container.gameObject.SetActive(false);
+            ToolTipPanel.SetActive(false);
         }
         else if (Input.GetKeyDown(KeyCode.B)
             && !Container.gameObject.activeSelf
@@ -166,16 +178,22 @@ public class BuyMenu : MonoBehaviour
             {
                 Tank1.AttemptPurchaseMissile(currentMissileToBuy);
                 Container.gameObject.SetActive(false);
+                ToolTipPanel.SetActive(false);
             }
             else
             {
                 Tank2.AttemptPurchaseMissile(currentMissileToBuy);
                 Container.gameObject.SetActive(false);
+                ToolTipPanel.SetActive(false);
             }
         }
         else
         {
             currentMissileToBuy = selectedButton;
+            ToolTipPanel.SetActive(true);
+            TextMeshProUGUI textMesh2 = ToolTipText.GetComponent<TextMeshProUGUI>();
+            textMesh2.text = "MISSILE INFO:\n" + currentMissileToBuy.ToUpper()  + "\n" + MissileTips[selectedButton];
+
         }
        
     }
