@@ -1138,6 +1138,9 @@ MonoBehaviour:
   - name: Sniper Missile
     missile: {fileID: 8451944392418705572, guid: 051faf7602bea4b63803acb31d10e9f9, type: 3}
     cost: 50
+  - name: Blue Angry Bird
+    missile: {fileID: 7194570854676003303, guid: 58cd3a364c4e7409aba0c4636ba28b17, type: 3}
+    cost: 150
   - name: Mountain Maker
     missile: {fileID: 8507056140642299404, guid: 1d52e81463cac4ccb8baed931cd1620d, type: 3}
     cost: 150

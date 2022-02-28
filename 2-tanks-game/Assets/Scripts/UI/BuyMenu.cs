@@ -39,7 +39,8 @@ public class BuyMenu : MonoBehaviour
         {"Sniper Missile","High damage but you have to hit your shots" },
         {"Whale","When whale is in air, click to birth fishies" },
         {"Summon Death", "Seems pretty self explanatory" },
-        {"Mountain Maker", "Spawns a mountain where it lands" }
+        {"Mountain Maker", "Spawns a mountain where it lands" },
+        {"Blue Angry Bird", "Click to split into 3 birds- just like the mobile game" }
     };
 
 
