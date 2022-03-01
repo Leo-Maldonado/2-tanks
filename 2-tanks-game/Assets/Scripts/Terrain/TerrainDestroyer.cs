@@ -42,11 +42,11 @@ public class TerrainDestroyer : MonoBehaviour
                         // Give player 2 points if it is player 1's turn (since turns change directly after shooting)
                         if (turnManager.IsPlayerTurn(1))
                         {
-                            GameObject.Find("Tank2").GetComponent<Tank>().turnPoints += 1000;
+                            GameObject.Find("Tank2").GetComponent<Tank>().turnPoints += 150;
                         }
                         else
                         {
-                            GameObject.Find("Tank1").GetComponent<Tank>().turnPoints += 1000;
+                            GameObject.Find("Tank1").GetComponent<Tank>().turnPoints += 150;
                         }
                     }
                     // Award player even more points for destroying diamond
@@ -55,11 +55,11 @@ public class TerrainDestroyer : MonoBehaviour
                         // Give player 2 points if it is player 1's turn (since turns change directly after shooting)
                         if (turnManager.IsPlayerTurn(1))
                         {
-                            GameObject.Find("Tank2").GetComponent<Tank>().turnPoints += 100000;
+                            GameObject.Find("Tank2").GetComponent<Tank>().turnPoints += 300;
                         }
                         else
                         {
-                            GameObject.Find("Tank1").GetComponent<Tank>().turnPoints += 100000;
+                            GameObject.Find("Tank1").GetComponent<Tank>().turnPoints += 300;
                         }
                     }
                     DestroyTile(tilePos);

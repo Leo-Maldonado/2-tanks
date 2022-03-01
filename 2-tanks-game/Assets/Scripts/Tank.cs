@@ -78,6 +78,9 @@ public class Tank : MonoBehaviour
     // The buy menu
     private GameObject buyMenu;
 
+    // If we are allowed to move
+    private bool canMove = true;
+
 
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
@@ -126,11 +129,7 @@ public class Tank : MonoBehaviour
         Shoot();
 
         // If we lost or want to quit
-        if (this.Health <= 0)
-        {
-            sprender = gameObject.GetComponent<SpriteRenderer>();
-            sprender.enabled = false;
-        }
+        CheckLost();
         
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
@@ -145,6 +144,22 @@ public class Tank : MonoBehaviour
             Flip();
             SlopeCheck();
             ApplyMovement();
+        }
+    }
+
+    // Check if we lost
+    void CheckLost()
+    {
+        if (this.Health <= 0)
+        {
+            // Disable tank sprite
+            sprender = gameObject.GetComponent<SpriteRenderer>();
+            sprender.enabled = false;
+        }
+        // Disable all movement
+        if (gameOverScreen.GameOver)
+        {
+            canMove = false;
         }
     }
 
@@ -167,6 +182,10 @@ public class Tank : MonoBehaviour
     // Movement based on if we are on a slope or not
     void ApplyMovement()
     {
+        // Break if we can't move
+        if (!canMove) { return; }
+
+        // Move
         if (!isOnSlope)
         {
             rigidBody.velocity = new Vector2(movementSpeed * xInput, 0.0f);
@@ -187,6 +206,9 @@ public class Tank : MonoBehaviour
     // Flip tank to face direction of motion
     void Flip()
     {
+        // Break if we can't move
+        if (!canMove) { return; }
+
         // Flip so we always face forward
         if (turnManager.IsPlayerTurn(1))
         {
@@ -241,7 +263,7 @@ public class Tank : MonoBehaviour
         // Get points if haven't already
         if (playerTurn && !hasEarnedPoints)
         {
-            turnPoints += 100;
+            turnPoints += 50;
             hasEarnedPoints = true;
         }
         // If its the other players turn, reset so we can earn next turn

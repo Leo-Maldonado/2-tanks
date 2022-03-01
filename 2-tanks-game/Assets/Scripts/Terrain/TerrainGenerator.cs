@@ -73,14 +73,16 @@ public class TerrainGenerator : MonoBehaviour
         GameObject tank2 = GameObject.Find("Tank2");
 
         if (turnManager.IsPlayerTurn(1)
-            && FindObjectOfType<Arrow>() == null)
+            && FindObjectOfType<Arrow>() == null
+            && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             // Instantiate in front of tank
             Vector3 arrowPos = new Vector3(tank1.transform.position.x, tank1.transform.position.y);
             GameObject arw = Instantiate(arrow, arrowPos, Quaternion.identity);
         }
         if (turnManager.IsPlayerTurn(2)
-            && FindObjectOfType<Arrow>() == null)
+            && FindObjectOfType<Arrow>() == null
+            && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             // Instantiate in front of tank
             Vector3 arrowPos = new Vector3(tank2.transform.position.x, tank2.transform.position.y);

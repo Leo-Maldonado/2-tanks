@@ -33,10 +33,10 @@ public class BuyMenu : MonoBehaviour
     private Dictionary<string, string> MissileTips = new Dictionary<string, string>()
     {
         {"Basic Missile","Average damage and average terrain destruction" },
-        {"Miner Missile","Low damage but big terrain destruction " },
+        {"Miner Missile","Low damage but big terrain destruction" },
         {"Sniper Missile","High damage but you have to hit your shots" },
         {"Whale","When whale is in air, click to birth fishies" },
-        {"Summon Death", "Seems pretty self explanatory" },
+        {"Summon Death", "Summon the Bringer of Death" },
         {"Mountain Maker", "Spawns a mountain where it lands" },
         {"Blue Angry Bird", "Click to split into 3 birds- just like the mobile game" },
         {"Portal Gun", "Portals your tank to wherever this projectile lands" }
@@ -145,7 +145,6 @@ public class BuyMenu : MonoBehaviour
             {
                 currentMissileToBuy = Tank2.currentMissileName;
             }
-            ToolTipPanel.SetActive(false);
         }
     }
 
@@ -186,30 +185,39 @@ public class BuyMenu : MonoBehaviour
             {
                 Tank1.AttemptPurchaseMissile(currentMissileToBuy);
                 Container.gameObject.SetActive(false);
-                ToolTipPanel.SetActive(false);
             }
             else
             {
                 Tank2.AttemptPurchaseMissile(currentMissileToBuy);
                 Container.gameObject.SetActive(false);
-                ToolTipPanel.SetActive(false);
             }
         }
         else
         {
             currentMissileToBuy = selectedButton;
-            if (turnManager.IsPlayerTurn(2)) // Tooltip appears on players relative sides
-            {
-                ToolTipPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(650, -165);
-            }
-            else
-            {
-                ToolTipPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-650, -165);
-            }
-            ToolTipPanel.SetActive(true);
-            TextMeshProUGUI textMesh2 = ToolTipText.GetComponent<TextMeshProUGUI>();
-            textMesh2.text = currentMissileToBuy.ToUpper()  + ":\n" + MissileTips[selectedButton];
         }
        
+    }
+
+    // Display tooltip method
+    public void EnterToolTip(string selectedButton)
+    {
+        if (turnManager.IsPlayerTurn(2)) // Tooltip appears on players relative sides
+        {
+            ToolTipPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(650, -165);
+        }
+        else
+        {
+            ToolTipPanel.GetComponent<RectTransform>().anchoredPosition = new Vector2(-650, -165);
+        }
+        ToolTipPanel.SetActive(true);
+        TextMeshProUGUI textMesh2 = ToolTipText.GetComponent<TextMeshProUGUI>();
+        textMesh2.text = selectedButton.ToUpper() + ":\n" + MissileTips[selectedButton];
+    }
+
+    // Remove tooltip method
+    public void ExitToolTip()
+    {
+        ToolTipPanel.SetActive(false);
     }
 }
