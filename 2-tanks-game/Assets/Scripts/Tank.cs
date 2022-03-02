@@ -98,6 +98,7 @@ public class Tank : MonoBehaviour
         }
     }
 
+
     // Start
     void Start()
     {
@@ -135,6 +136,21 @@ public class Tank : MonoBehaviour
         
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
+
+        buyMenu = GameObject.Find("Container");
+ 
+        if (buyMenu)
+        {
+            if (buyMenu.activeSelf)
+            {
+                this.canMove = false;
+            }
+            if (!buyMenu.activeSelf)
+            {
+                this.canMove = true;
+            }
+        }
+
 
     }
 
@@ -278,6 +294,7 @@ public class Tank : MonoBehaviour
     }
 
     // Choose missile
+    //Pretty sure we can delete this now
     private void ChooseMissile()
     {
         if (playerTurn && GameObject.FindGameObjectWithTag("Projectile") == null)
@@ -325,9 +342,8 @@ public class Tank : MonoBehaviour
         // You can only shoot if buy menu isn't up
         buyMenu = GameObject.Find("Container");
 
-        //Debug.Log(EventSystem.current.IsPointerOverGameObject());
 
-            if (Input.GetKeyDown(KeyCode.Mouse0)
+        if (Input.GetKeyDown(KeyCode.Mouse0)
             && GameObject.FindGameObjectWithTag("Projectile") == null
             && playerTurn
             && !gameOverScreen.GameOver
