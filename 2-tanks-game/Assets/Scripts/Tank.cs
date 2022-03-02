@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class Tank : MonoBehaviour
 {
@@ -323,12 +325,15 @@ public class Tank : MonoBehaviour
         // You can only shoot if buy menu isn't up
         buyMenu = GameObject.Find("Container");
 
-        if (Input.GetKeyDown(KeyCode.Mouse0)
+        //Debug.Log(EventSystem.current.IsPointerOverGameObject());
+
+            if (Input.GetKeyDown(KeyCode.Mouse0)
             && GameObject.FindGameObjectWithTag("Projectile") == null
             && playerTurn
             && !gameOverScreen.GameOver
             && !testing
-            && !buyMenu)
+            && !buyMenu
+            && !EventSystem.current.IsPointerOverGameObject())
         {
             // Get rid of the aiming arrow and last shot marker
             Destroy(FindObjectOfType<Arrow>().gameObject);

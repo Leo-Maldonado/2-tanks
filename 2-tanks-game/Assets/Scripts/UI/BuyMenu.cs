@@ -106,7 +106,7 @@ public class BuyMenu : MonoBehaviour
         Button[] buttons = FindObjectsOfType<Button>();
         foreach (Button b in buttons)
         {
-            if(b.name != "BuyButton")
+            if(b.name != "BuyButton" && b.name != "Player1BuyButton" && b.name != "Player2BuyButton")
             {
                 if (turnManager.IsPlayerTurn(1))
                 {
