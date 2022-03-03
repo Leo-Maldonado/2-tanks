@@ -218,7 +218,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Purchase Missiles
+  m_text: Buy Missiles
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5b253c3b156c4e52b6e1db0b5d865bf, type: 2}
   m_sharedMaterial: {fileID: -2204665169095241462, guid: b5b253c3b156c4e52b6e1db0b5d865bf, type: 2}
@@ -4120,7 +4120,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Purchase Missiles
+  m_text: Buy Missiles
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5b253c3b156c4e52b6e1db0b5d865bf, type: 2}
   m_sharedMaterial: {fileID: -2204665169095241462, guid: b5b253c3b156c4e52b6e1db0b5d865bf, type: 2}

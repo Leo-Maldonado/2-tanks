@@ -354,29 +354,46 @@ public class Tank : MonoBehaviour
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
             // Calculate rotation to spawn with
-            float yRel = Mathf.Clamp(relativeMousePos.y, 0.025f, 12.5f); // Can't shoot down
-            float xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
-            if (facingDirection == 1 && turnManager.IsPlayerTurn(1))
-            {
-                xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
-            }
-            else if(turnManager.IsPlayerTurn(1))
-            {
-                xRel = Mathf.Clamp(relativeMousePos.x, -12.5f, -0.025f);
-            }
+            //float yRel = Mathf.Clamp(relativeMousePos.y, 0.025f, 12.5f); // Can't shoot down
+            //float xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
+            float xRel = relativeMousePos.x;
+            float yRel = relativeMousePos.y;
+            //should find largest abs of x and y then scale based on that
+            float ratio;
+            float xDir = 1;
             if (facingDirection == 1 && turnManager.IsPlayerTurn(2))
             {
-                xRel = Mathf.Clamp(relativeMousePos.x, -12.5f, -0.025f);
+                //xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
+                xDir = -1;
             }
-            else if (turnManager.IsPlayerTurn(2))
+            if (facingDirection == -1 && turnManager.IsPlayerTurn(1))
             {
-                xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
+                //xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
+                xDir = -1;
             }
-            var angle = Mathf.Atan2(yRel, xRel) * Mathf.Rad2Deg;
+            if (Mathf.Abs(relativeMousePos.x) > 12.5f || Mathf.Abs(relativeMousePos.y) > 12.5f)
+            {
+                if(Mathf.Abs(relativeMousePos.x) > Mathf.Abs(relativeMousePos.y))
+                {
+                    ratio = Mathf.Abs(relativeMousePos.y) / Mathf.Abs(relativeMousePos.x);
+                    xRel = 12.5f;
+                    yRel = xRel * ratio;
+                    xRel *= xDir;
+                }
+                else
+                {
+                    ratio = Mathf.Abs(relativeMousePos.x) / Mathf.Abs(relativeMousePos.y);
+                    yRel = 12.5f;
+                    xRel = yRel * ratio * xDir;
+                }
+
+
+            }
+            var angle = Mathf.Atan2(relativeMousePos.y, relativeMousePos.x) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
             // Spawn missile in direction of arrow
-            Vector3 normalized = new Vector3(xRel, yRel, 0).normalized;
+            Vector3 normalized = new Vector3(relativeMousePos.x, relativeMousePos.y, 0).normalized;
             Vector3 missilePos = transform.position + normalized * 2.5f;
             GameObject missile = Instantiate(currentMissile, missilePos, q);
 
