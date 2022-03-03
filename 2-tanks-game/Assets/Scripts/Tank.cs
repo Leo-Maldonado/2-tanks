@@ -80,6 +80,8 @@ public class Tank : MonoBehaviour
     // The buy menu
     private GameObject buyMenu;
 
+    public GameObject pauseMenu;
+
     // If we are allowed to move
     private bool canMove = true;
 
@@ -127,7 +129,8 @@ public class Tank : MonoBehaviour
         // ChooseMissile();
 
         // Shoot
-        Shoot();
+        //Moved to fixedUpdate to allow for pausing
+        //Shoot();
 
         // If we lost or want to quit
         CheckLost();
@@ -135,12 +138,27 @@ public class Tank : MonoBehaviour
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
 
-    }
+        //do pause menu in Update, because when TimeScale is paused, FixedUpdate() is never called
+        buyMenu = GameObject.Find("PauseMenu");
+
+        if (buyMenu)
+        {
+            this.canMove = false;
+        }
+        else
+        {
+            this.canMove = true;
+        }
+
+}
 
     // FixedUpdate for movement
     void FixedUpdate()
     {
         // Check if buy menu is open and if we can move
+        // Shoot
+        Shoot();
+
         buyMenu = GameObject.Find("Container");
         
         if (buyMenu)

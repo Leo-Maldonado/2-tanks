@@ -67,6 +67,19 @@ public class TerrainGenerator : MonoBehaviour
             {
                 SpawnArrow();
             }
+
+            if (GameObject.Find("PauseMenu"))
+            {
+                if (GameObject.Find("Arrow(Clone)"))
+                {
+                    Destroy(FindObjectOfType<Arrow>().gameObject);
+                }
+                
+            }
+            else
+            {
+                SpawnArrow();
+            }
         }
 
         // For now, reload the scene whenever space bar is pressed
