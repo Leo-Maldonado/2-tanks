@@ -99,7 +99,8 @@ public class BuyMenu : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.B)
             && !Container.gameObject.activeSelf
-            && GameObject.FindGameObjectWithTag("Projectile") == null)
+            && GameObject.FindGameObjectWithTag("Projectile") == null
+            && GameObject.Find("PauseMenu") == null)
         {
             Container.gameObject.SetActive(true);
         }
@@ -108,7 +109,7 @@ public class BuyMenu : MonoBehaviour
         Button[] buttons = FindObjectsOfType<Button>();
         foreach (Button b in buttons)
         {
-            if(b.name != "BuyButton" && b.name != "Player1BuyButton" && b.name != "Player2BuyButton" && b.name != "BuyMenuExitButton" && b.name != "ResumeGameButton")
+            if(b.name != "BuyButton" && b.name != "Player1BuyButton" && b.name != "Player2BuyButton" && b.name != "BuyMenuExitButton" && b.name != "ResumeGameButton" && b.name != "RestartGameButton" && b.name != "QuitGameButton" && b.name != "PauseButton")
             {
                 if (turnManager.IsPlayerTurn(1))
                 {
@@ -180,24 +181,28 @@ public class BuyMenu : MonoBehaviour
         Tank1 = GameObject.Find("Tank1").GetComponent<Tank>();
         Tank2 = GameObject.Find("Tank2").GetComponent<Tank>();
         // Get name of button clicked on, and attempt to purchase it for the correct tank
-        string selectedButton = EventSystem.current.currentSelectedGameObject.name;
-        if(selectedButton == "BuyButton")
+        if (EventSystem.current.currentSelectedGameObject)
         {
-            if (turnManager.IsPlayerTurn(1) && GameObject.FindGameObjectWithTag("Projectile") == null)
+            string selectedButton = EventSystem.current.currentSelectedGameObject.name;
+            if (selectedButton == "BuyButton")
             {
-                Tank1.AttemptPurchaseMissile(currentMissileToBuy);
-                Container.gameObject.SetActive(false);
+                if (turnManager.IsPlayerTurn(1) && GameObject.FindGameObjectWithTag("Projectile") == null)
+                {
+                    Tank1.AttemptPurchaseMissile(currentMissileToBuy);
+                    Container.gameObject.SetActive(false);
+                }
+                else
+                {
+                    Tank2.AttemptPurchaseMissile(currentMissileToBuy);
+                    Container.gameObject.SetActive(false);
+                }
             }
             else
             {
-                Tank2.AttemptPurchaseMissile(currentMissileToBuy);
-                Container.gameObject.SetActive(false);
+                currentMissileToBuy = selectedButton;
             }
         }
-        else
-        {
-            currentMissileToBuy = selectedButton;
-        }
+        
        
     }
 

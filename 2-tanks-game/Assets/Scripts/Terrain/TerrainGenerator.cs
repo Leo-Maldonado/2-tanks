@@ -82,11 +82,7 @@ public class TerrainGenerator : MonoBehaviour
             }
         }
 
-        // For now, reload the scene whenever space bar is pressed
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
+       
     }
 
     // Spawn arrow
