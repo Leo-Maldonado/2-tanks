@@ -83,7 +83,6 @@ public class Tank : MonoBehaviour
     // If we are allowed to move
     private bool canMove = true;
 
-
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
     {
@@ -97,10 +96,6 @@ public class Tank : MonoBehaviour
             this.Health = newHealth;
         }
     }
-
-
-
-
 
     // Start
     void Start()

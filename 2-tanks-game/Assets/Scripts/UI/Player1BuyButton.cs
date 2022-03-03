@@ -16,7 +16,7 @@ public class Player1BuyButton : MonoBehaviour
     public void OnPurchaseButtonClick()
     {
        
-        if (Panel != null && turnManager.IsPlayerTurn(1))
+        if (Panel != null && turnManager.IsPlayerTurn(1) && GameObject.FindGameObjectWithTag("Projectile") == null)
         {
             Panel.SetActive(true);
         }
