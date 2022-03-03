@@ -50,6 +50,7 @@ public class Arrow : MonoBehaviour
             //Follow tank
             transform.position = tank2.transform.position;
         }
+
     }
 
     private void FixedUpdate()

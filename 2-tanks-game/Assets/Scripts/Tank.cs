@@ -140,27 +140,25 @@ public class Tank : MonoBehaviour
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
 
-        buyMenu = GameObject.Find("Container");
- 
-        if (buyMenu)
-        {
-            if (buyMenu.activeSelf)
-            {
-                this.canMove = false;
-            }
-            if (!buyMenu.activeSelf)
-            {
-                this.canMove = true;
-            }
-        }
-
-
     }
 
     // FixedUpdate for movement
     void FixedUpdate()
     {
-        if (playerTurn && GameObject.FindGameObjectWithTag("Projectile") == null)
+        // Check if buy menu is open and if we can move
+        buyMenu = GameObject.Find("Container");
+        
+        if (buyMenu)
+        {
+            this.canMove = false;
+        }
+        else
+        {
+            this.canMove = true;
+        }
+
+        // Move if allowed
+        if (playerTurn && GameObject.FindGameObjectWithTag("Projectile") == null && canMove)
         {
             Flip();
             SlopeCheck();
@@ -203,9 +201,6 @@ public class Tank : MonoBehaviour
     // Movement based on if we are on a slope or not
     void ApplyMovement()
     {
-        // Break if we can't move
-        if (!canMove) { return; }
-
         // Move
         if (!isOnSlope)
         {
@@ -227,9 +222,6 @@ public class Tank : MonoBehaviour
     // Flip tank to face direction of motion
     void Flip()
     {
-        // Break if we can't move
-        if (!canMove) { return; }
-
         // Flip so we always face forward
         if (turnManager.IsPlayerTurn(1))
         {

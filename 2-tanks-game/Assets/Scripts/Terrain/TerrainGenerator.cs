@@ -57,6 +57,16 @@ public class TerrainGenerator : MonoBehaviour
         if (GameObject.Find("Tank1").GetComponent<Tank>().Health > 0 && GameObject.Find("Tank2").GetComponent<Tank>().Health > 0)
         {
             SpawnArrow();
+
+            // Hide if buy menu up
+            if (GameObject.Find("Container"))
+            {
+                Destroy(FindObjectOfType<Arrow>().gameObject);
+            }
+            else
+            {
+                SpawnArrow();
+            }
         }
 
         // For now, reload the scene whenever space bar is pressed

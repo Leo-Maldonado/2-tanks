@@ -89,22 +89,6 @@ public class BuyMenu : MonoBehaviour
         Tank1 = GameObject.Find("Tank1").GetComponent<Tank>();
         Tank2 = GameObject.Find("Tank2").GetComponent<Tank>();
 
-        //if buy menu is active, disactivate the arrow
-        var temp = GameObject.Find("Arrow(Clone)");
-        if (temp)
-        {
-            arrow = temp.GetComponent<Arrow>();
-            if (Container.gameObject.activeSelf)
-            {
-                arrow.gameObject.SetActive(false);
-            }
-            else if (!Container.gameObject.activeSelf)
-            {
-                arrow.gameObject.SetActive(true);
-            }
-        }
- 
-
         // Close and bring up when B is pressed
         if ((Input.GetKeyDown(KeyCode.B) || Input.GetKeyDown(KeyCode.Escape))
             && Container.gameObject.activeSelf
@@ -119,7 +103,6 @@ public class BuyMenu : MonoBehaviour
         {
             Container.gameObject.SetActive(true);
         }
-
 
         // Grey out missiles that we cannot afford
         Button[] buttons = FindObjectsOfType<Button>();
