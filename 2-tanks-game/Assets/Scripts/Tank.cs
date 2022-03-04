@@ -129,8 +129,7 @@ public class Tank : MonoBehaviour
         // ChooseMissile();
 
         // Shoot
-        //Moved to fixedUpdate to allow for pausing
-        //Shoot();
+        Shoot();
 
         // If we lost or want to quit
         CheckLost();
@@ -156,9 +155,6 @@ public class Tank : MonoBehaviour
     void FixedUpdate()
     {
         // Check if buy menu is open and if we can move
-        // Shoot
-        Shoot();
-
         buyMenu = GameObject.Find("Container");
         
         if (buyMenu)
