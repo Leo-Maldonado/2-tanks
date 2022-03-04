@@ -407,11 +407,43 @@ public class Tank : MonoBehaviour
             {
                 yRel = 0.25f;
             }
-            var angle = Mathf.Atan2(relativeMousePos.y, relativeMousePos.x) * Mathf.Rad2Deg;
+            if(facingDirection == 1 && turnManager.IsPlayerTurn(1))
+            {
+                if(relativeMousePos.x < 0f)
+                {
+                    yRel = Mathf.Clamp(relativeMousePos.y, 0f, 12.5f);
+                    xRel = 0f;
+                }
+            }
+            if (facingDirection == -1 && turnManager.IsPlayerTurn(1))
+            {
+                if (relativeMousePos.x > 0)
+                {
+                    yRel = Mathf.Clamp(relativeMousePos.y, 0f, 12.5f);
+                    xRel = 0f;
+                }
+            }
+            if (facingDirection == 1 && turnManager.IsPlayerTurn(2))
+            {
+                if (relativeMousePos.x > 0)
+                {
+                    yRel = Mathf.Clamp(relativeMousePos.y, 0f, 12.5f);
+                    xRel = 0f;
+                }
+            }
+            if (facingDirection == -1 && turnManager.IsPlayerTurn(2))
+            {
+                if (relativeMousePos.x < 0)
+                {
+                    yRel = Mathf.Clamp(relativeMousePos.y, 0f, 12.5f);
+                    xRel = 0f;
+                }
+            }
+            var angle = Mathf.Atan2(yRel, xRel) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
             // Spawn missile in direction of arrow
-            Vector3 normalized = new Vector3(relativeMousePos.x, relativeMousePos.y, 0).normalized;
+            Vector3 normalized = new Vector3(xRel, yRel, 0).normalized;
             Vector3 missilePos = transform.position + normalized * 2.5f;
             GameObject missile = Instantiate(currentMissile, missilePos, q);
 
