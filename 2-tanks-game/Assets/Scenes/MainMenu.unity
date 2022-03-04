@@ -521,7 +521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 200}
+  m_AnchoredPosition: {x: 0, y: 238}
   m_SizeDelta: {x: 200, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &782455378
@@ -547,8 +547,8 @@ MonoBehaviour:
   m_text: 'INSTRUCTIONS: \n 2 Tanks Is a 2 player game with alternating turns.\nMove
     with A & D or ARROW keys.\nEarn coins every turn and destroy precious gems below
     you for more. \n Open the Buy Menu with B to spend your coins on strategic weapons
-    upgrades. \n Click to shoot and watch your missile fly towards your enemy. \nLast
-    tank standing wins.\n HAVE FUN!'
+    upgrades. \n Click to shoot and watch your missile fly towards your enemy. The
+    X displays where you last clicked. \nLast tank standing wins.\n HAVE FUN!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5b253c3b156c4e52b6e1db0b5d865bf, type: 2}
   m_sharedMaterial: {fileID: -2204665169095241462, guid: b5b253c3b156c4e52b6e1db0b5d865bf, type: 2}
@@ -662,7 +662,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -450, y: 250}
+  m_AnchoredPosition: {x: -472, y: 282}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1110931265
