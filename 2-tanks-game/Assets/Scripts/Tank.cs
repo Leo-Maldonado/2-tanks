@@ -403,6 +403,10 @@ public class Tank : MonoBehaviour
 
 
             }
+            if(relativeMousePos.y < 0.25f)
+            {
+                yRel = 0.25f;
+            }
             var angle = Mathf.Atan2(relativeMousePos.y, relativeMousePos.x) * Mathf.Rad2Deg;
             Quaternion q = Quaternion.AngleAxis(angle, Vector3.forward);
 
