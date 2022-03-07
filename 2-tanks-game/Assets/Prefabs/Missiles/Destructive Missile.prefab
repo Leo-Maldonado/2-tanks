@@ -120,6 +120,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionRadius: 5
   damage: 15
+  angleOffset: 0
+  explosionNoise: {fileID: 8300000, guid: 8d11a941f1a3147d1b0a24c8b5978b45, type: 3}
   IsInvisible: 0
   rigid: {fileID: 0}
 --- !u!60 &618387744391260671

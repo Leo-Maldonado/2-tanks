@@ -245,6 +245,7 @@ MonoBehaviour:
   explosionRadius: 0
   damage: 0
   angleOffset: 180
+  explosionNoise: {fileID: 8300000, guid: db74bf6ce1f124c5f81fe4b9ab7f36cb, type: 3}
   IsInvisible: 0
   rigid: {fileID: 0}
 --- !u!114 &4479137626997022421

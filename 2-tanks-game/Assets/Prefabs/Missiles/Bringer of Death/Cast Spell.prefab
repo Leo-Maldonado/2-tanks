@@ -116,3 +116,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellMissile: {fileID: 884205694339376890, guid: 9a7be8e2d4b554ffba44fcfd7f2e3412, type: 3}
+  summonSound: {fileID: 8300000, guid: 7825f1ae620ae459f9a2782b1e1d4c0a, type: 3}

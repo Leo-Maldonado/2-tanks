@@ -137,5 +137,6 @@ MonoBehaviour:
   explosionRadius: 3
   damage: 30
   angleOffset: 180
+  explosionNoise: {fileID: 8300000, guid: 8d11a941f1a3147d1b0a24c8b5978b45, type: 3}
   IsInvisible: 0
   rigid: {fileID: 0}

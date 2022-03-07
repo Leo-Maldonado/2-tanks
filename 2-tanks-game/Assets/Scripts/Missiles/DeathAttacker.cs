@@ -8,6 +8,9 @@ public class DeathAttacker : MonoBehaviour
     // Casting death bringer
     public GameObject caster;
 
+    // Sword attack sound
+    public AudioClip attackSound;
+
     // Position to spawn the spell casting death bringer
     private Vector3 aboveCollision;
 
@@ -31,6 +34,8 @@ public class DeathAttacker : MonoBehaviour
     // Destroy terrain and damage tanks when the attacker swings his weapon
     private void DestroyStuff()
     {
+        // Play attack sound
+        AudioSource.PlayClipAtPoint(attackSound, transform.position, 2);
         GameObject tank1 = GameObject.Find("Tank1");
         GameObject tank2 = GameObject.Find("Tank2");
         // Destroy nearby terrain

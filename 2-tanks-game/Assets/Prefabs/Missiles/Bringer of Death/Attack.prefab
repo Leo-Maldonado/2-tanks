@@ -116,3 +116,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   caster: {fileID: 8312842660627638926, guid: f17c4c0413f8448239264fc900b0acd6, type: 3}
+  attackSound: {fileID: 8300000, guid: a7366a9909ad04f70b407722c4c8bf07, type: 3}

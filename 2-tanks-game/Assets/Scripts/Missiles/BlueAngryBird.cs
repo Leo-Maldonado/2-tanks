@@ -7,6 +7,8 @@ public class BlueAngryBird : MonoBehaviour
     // Blue birds that are spawned when the player clicks
     public GameObject bird;
 
+    public AudioClip birdNoise;
+
     // Split into three birds when the player clicks
     void Update()
     {
@@ -30,6 +32,9 @@ public class BlueAngryBird : MonoBehaviour
             Vector3 bird3Velocity = velocity;
             bird3Velocity.y -= 2;
             bird3.GetComponent<Rigidbody2D>().velocity = bird3Velocity;
+
+            // Play bird noise
+            AudioSource.PlayClipAtPoint(birdNoise, transform.position, 2);
 
             Destroy(gameObject);
         }

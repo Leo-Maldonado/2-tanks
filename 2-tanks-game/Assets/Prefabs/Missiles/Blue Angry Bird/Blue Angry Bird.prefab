@@ -138,6 +138,7 @@ MonoBehaviour:
   explosionRadius: 3
   damage: 30
   angleOffset: 180
+  explosionNoise: {fileID: 8300000, guid: 8d11a941f1a3147d1b0a24c8b5978b45, type: 3}
   IsInvisible: 0
   rigid: {fileID: 0}
 --- !u!114 &-6550151252239238154
@@ -153,3 +154,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bird: {fileID: 3148298184891639942, guid: bb64085f39bd94b31a66e207b7f7a70e, type: 3}
+  birdNoise: {fileID: 8300000, guid: af0c31d9c8a314e6893fb66e9ef585d2, type: 3}

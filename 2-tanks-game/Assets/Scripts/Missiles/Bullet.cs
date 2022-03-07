@@ -12,6 +12,11 @@ public class Bullet : MonoBehaviour
     // Angle added to the rotation (to rotate sprites that aren't originally oriented correctly)
     public int angleOffset = 0;
 
+    // Noise to play when bullet/projectile explodes
+    public AudioClip explosionNoise;
+    // Volume of the explosion
+    private float explosionVolume = 2;
+
     public bool IsInvisible = false;
 
     private GameObject tank1;
@@ -62,6 +67,11 @@ public class Bullet : MonoBehaviour
                 float damageScale = (explosionRadius - tank2Distance) / explosionRadius;
                 tank2.GetComponent<Tank>().TakeDamage(Mathf.RoundToInt(damage * damageScale));
             }
+            // If there is an explosion noise, play it
+            if (explosionNoise != null)
+            {
+                AudioSource.PlayClipAtPoint(explosionNoise, transform.position, explosionVolume);
+            }
             Destroy(this.gameObject);
         }
         if (collision.gameObject.GetComponent<Tank>())
@@ -76,11 +86,21 @@ public class Bullet : MonoBehaviour
                 tank2.GetComponent<Tank>().TakeDamage(damage);
             }
             FindObjectOfType<Tilemap>().GetComponent<TerrainDestroyer>().DestroyTerrain(this.transform.position, explosionRadius);
+            // If there is an explosion noise, play it
+            if (explosionNoise != null)
+            {
+                AudioSource.PlayClipAtPoint(explosionNoise, transform.position, explosionVolume);
+            }
             Destroy(this.gameObject);
         }
         // Destroy the projectile if it collides with a barrier
         if (collision.collider.gameObject.tag == "Barrier")
         {
+            // If there is an explosion noise, play it
+            if (explosionNoise != null)
+            {
+                AudioSource.PlayClipAtPoint(explosionNoise, transform.position, explosionVolume);
+            }
             Destroy(this.gameObject);
         }
     }
