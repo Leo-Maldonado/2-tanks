@@ -9,6 +9,7 @@ public class PauseMenuObject : MonoBehaviour
 
     void Start()
     {
+
     }
 
     // Update is called once per frame
@@ -20,11 +21,13 @@ public class PauseMenuObject : MonoBehaviour
         {
             Menu.SetActive(true);
             Time.timeScale = 0;
+            GameObject.Find("PauseButton").GetComponent<PauseButton>().IsPaused = true;
         }
         else if(Input.GetKeyDown(KeyCode.Escape) & Menu.activeSelf)
         {
             Menu.SetActive(false);
             Time.timeScale = 1;
+            GameObject.Find("PauseButton").GetComponent<PauseButton>().IsPaused = false;
         }
     }
 }

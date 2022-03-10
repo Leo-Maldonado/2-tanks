@@ -85,6 +85,9 @@ public class Tank : MonoBehaviour
     // If we are allowed to move
     private bool canMove = true;
 
+    // if game is paused
+    private bool isPaused = false;
+
     // Apply the specified damage to the tank's health
     public void TakeDamage(int damage)
     {
@@ -119,8 +122,9 @@ public class Tank : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Update whether or not it is this tank's turn
+        // Update whether or not it is this tank's turn and if game is paused
         playerTurn = turnManager.GetComponent<TurnManager>().IsPlayerTurn(tankNumber);
+        isPaused = GameObject.Find("PauseButton").GetComponent<PauseButton>().IsPaused;
 
         // Correct turn points
         ManageTurnPoints();
@@ -136,18 +140,6 @@ public class Tank : MonoBehaviour
         
         // Input
         xInput = Input.GetAxisRaw("Horizontal");
-
-        //do pause menu in Update, because when TimeScale is paused, FixedUpdate() is never called
-        buyMenu = GameObject.Find("PauseMenu");
-
-        if (buyMenu)
-        {
-            this.canMove = false;
-        }
-        else
-        {
-            this.canMove = true;
-        }
 
 }
 
@@ -298,7 +290,6 @@ public class Tank : MonoBehaviour
     }
 
     // Choose missile
-    //Pretty sure we can delete this now
     private void ChooseMissile()
     {
         if (playerTurn && GameObject.FindGameObjectWithTag("Projectile") == null)
@@ -346,14 +337,14 @@ public class Tank : MonoBehaviour
         // You can only shoot if buy menu isn't up
         buyMenu = GameObject.Find("Container");
 
-
         if (Input.GetKeyDown(KeyCode.Mouse0)
             && GameObject.FindGameObjectWithTag("Projectile") == null
             && playerTurn
             && !gameOverScreen.GameOver
             && !testing
             && !buyMenu
-            && !EventSystem.current.IsPointerOverGameObject())
+            && !EventSystem.current.IsPointerOverGameObject()
+            && !isPaused)
         {
             // Get rid of the aiming arrow and last shot marker
             Destroy(FindObjectOfType<Arrow>().gameObject);
@@ -368,21 +359,16 @@ public class Tank : MonoBehaviour
             Vector3 relativeMousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
             // Calculate rotation to spawn with
-            //float yRel = Mathf.Clamp(relativeMousePos.y, 0.025f, 12.5f); // Can't shoot down
-            //float xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
             float xRel = relativeMousePos.x;
             float yRel = relativeMousePos.y;
-            //should find largest abs of x and y then scale based on that
             float ratio;
             float xDir = 1;
             if (facingDirection == 1 && turnManager.IsPlayerTurn(2))
             {
-                //xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
                 xDir = -1;
             }
             if (facingDirection == -1 && turnManager.IsPlayerTurn(1))
             {
-                //xRel = Mathf.Clamp(relativeMousePos.x, 0.025f, 12.5f);
                 xDir = -1;
             }
             if (Mathf.Abs(relativeMousePos.x) > 12.5f || Mathf.Abs(relativeMousePos.y) > 12.5f)
@@ -400,8 +386,6 @@ public class Tank : MonoBehaviour
                     yRel = 12.5f;
                     xRel = yRel * ratio * xDir;
                 }
-
-
             }
             if(relativeMousePos.y < 0.25f)
             {

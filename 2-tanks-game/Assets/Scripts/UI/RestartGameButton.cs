@@ -10,6 +10,7 @@ public class RestartGameButton : MonoBehaviour
     {
 
        Time.timeScale = 1;
+        GameObject.Find("PauseButton").GetComponent<PauseButton>().IsPaused = false;
        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
     }
