@@ -41,7 +41,7 @@ public class TerrainGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Screen.SetResolution(1920, 1080, true);
+        //Screen.SetResolution(1920, 1080, true);
         // Get tilemap
         tilemap = GetComponent<Tilemap>();
         // Generate terrain once

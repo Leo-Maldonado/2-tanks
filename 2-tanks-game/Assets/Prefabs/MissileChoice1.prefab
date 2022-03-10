@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3327685565020412971}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -95,8 +95,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba4b70b4c074d8f49a3e57eaddfe7ff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank1: {fileID: 0}
-  spriteRenderer: {fileID: 0}
-  fish: {fileID: 21300000, guid: 78040fcc3a5ca0646b20e131d68b3660, type: 3}
-  missile1: {fileID: 21300000, guid: bc5f3d5d36c8b854a8003e908a66237d, type: 3}
-  missile2: {fileID: 21300000, guid: b7a478d394ebd4d48b076b2defde536d, type: 3}
+  spriteRenderer: {fileID: 3714441859675024847}
